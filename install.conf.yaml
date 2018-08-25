@@ -1,0 +1,10 @@
+- defaults:
+    link:
+        relink: true
+        create: true
+
+- clean: ['~']
+
+- link:
+    ~/.config/i3: GUI/i3
+    ~/.config/polybar: GUI/polybar
