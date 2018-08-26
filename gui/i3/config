@@ -169,8 +169,23 @@ bindsym $mod+r mode "resize"
 
 ## Non-standard shit
 
+# GAPS
+for_window [class="^.*"] border pixel 0
+gaps inner 8
+gaps outer 0
+smart_gaps on
+
 # Turn off mouse focusing
 focus_follows_mouse no
 
+# Assign specific programs to workspaces
+for_window [class="Chromium"] move to workspace 2
+for_window [class="Spotify"] move to workspace 4
+# --- STARTUP THINGS ---
 # Start polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+# Get wallpaper
+exec --no-startup-id feh --bg-fill $HOME/Downloads/fuji-pagoda.jpg
+
+exec_always compton --config $HOME/.config/compton.conf -b --blur-method kawase

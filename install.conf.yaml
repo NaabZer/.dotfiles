@@ -3,8 +3,13 @@
         relink: true
         create: true
 
+
+- shell:
+    - bash install_colors.sh
 - clean: ['~']
 
 - link:
-    ~/.config/i3: GUI/i3
-    ~/.config/polybar: GUI/polybar
+    ~/.config/i3: gui/i3
+    ~/.config/polybar: gui/polybar
+    ~/.config/termite: terminal/termite
+    ~/.config/compton.conf: gui/compton/config
