@@ -13,3 +13,4 @@
     ~/.config/polybar: gui/polybar
     ~/.config/termite: terminal/termite
     ~/.config/compton.conf: gui/compton/config
+    ~/.config/rofi: gui/rofi
