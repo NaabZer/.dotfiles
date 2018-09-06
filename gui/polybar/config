@@ -56,10 +56,12 @@ module-margin-right = 0
 
 font-0 = Inconsolata-g:pixelsize=12;1
 font-1 = "FontAwesome:style=regular:pixelsize=15;2"
+font-2 = Inconsolata-g:pixelsize=8;-12
+font-3 = Inconsolata-g:pixelsize=2;-12
 
 modules-left = i3
 modules-center = spotify mpd
-modules-right = wlan volume xkeyboard battery date powermenu
+modules-right = wlan xbacklight volume xkeyboard battery date powermenu
 
 
 ;tray-position = right
@@ -99,37 +101,43 @@ strip-wsnumbers = true
 ; Only show workspaces on the same output as the bar
 pin-workspaces = true
 
-label-mode-padding = 2
+label-mode-padding = 0
 label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
-label-focused = %icon%
+label-focused = "%{T4} %{T3}%index%%{T-}  %icon%  %{T3} %{T4}"
 label-focused-background = ${colors.background-alt}
 ;label-focused-underline = ${colors.secondary}
-label-focused-padding = 2
+label-focused-padding = 0
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = %icon%
-label-unfocused-padding = 2
+label-unfocused = "%{T4} %{T3}%index%%{T-}  %icon%  %{T3} %{T4}"
+label-unfocused-padding = 0
 
 ; visible = Active workspace on unfocused monitor
-label-visible = %icon%
+label-visible = "%{T4} %{T3}%index%%{T-}  %icon%  %{T3} %{T4}"
 label-visible-background = ${self.label-focused-background}
 ; label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = 2
+label-visible-padding = 0
 label-visible-offset = 5
 
 ; urgent = Workspace with urgency hint set
-label-urgent = %icon%
+label-urgent = "%{T4} %{T3}%index%%{T-}  %icon%  %{T3} %{T4}"
 label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
+label-urgent-padding = 0
 
 ws-icon-default = 
 ws-icon-0 = 1;
 ws-icon-1 = 2;
-ws-icon-2 = 3;
-ws-icon-3 = 4;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 10;
 
 
 
