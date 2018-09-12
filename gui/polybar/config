@@ -54,13 +54,14 @@ padding-right = 3
 module-margin-left = 3
 module-margin-right = 0
 
-font-0 = Inconsolata-g:pixelsize=12;1
-font-1 = "FontAwesome:style=regular:pixelsize=15;2"
-font-2 = Inconsolata-g:pixelsize=8;-12
+font-0 = Inconsolata-g:pixelsize=11;2
+font-1 = "FontAwesome:style=regular:pixelsize=15;3"
+font-2 = Inconsolata-g:pixelsize=9;-12
 font-3 = Inconsolata-g:pixelsize=2;-12
+font-4 = "IPAPMincho:pixelsize=11;2"
 
 modules-left = i3
-modules-center = spotify mpd
+modules-center = spotify
 modules-right = wlan xbacklight volume xkeyboard battery date powermenu
 
 
@@ -107,24 +108,24 @@ label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
-label-focused = "%{T4} %{T3}%index%%{T-}  %icon%  %{T3} %{T4}"
+label-focused = "%{T4} %{T3}%index:2%%{T-} %icon% %{T3}  %{T4}"
 label-focused-background = ${colors.background-alt}
 ;label-focused-underline = ${colors.secondary}
 label-focused-padding = 0
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = "%{T4} %{T3}%index%%{T-}  %icon%  %{T3} %{T4}"
+label-unfocused = "%{T4} %{T3}%index:2%%{T-} %icon% %{T3}  %{T4}"
 label-unfocused-padding = 0
 
 ; visible = Active workspace on unfocused monitor
-label-visible = "%{T4} %{T3}%index%%{T-}  %icon%  %{T3} %{T4}"
+label-visible = "%{T4} %{T3}%index:2%%{T-} %icon% %{T3}  %{T4}"
 label-visible-background = ${self.label-focused-background}
 ; label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = 0
 label-visible-offset = 5
 
 ; urgent = Workspace with urgency hint set
-label-urgent = "%{T4} %{T3}%index%%{T-}  %icon%  %{T3} %{T4}"
+label-urgent = "%{T4} %{T3}%index:2%%{T-} %icon% %{T3}  %{T4}"
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 0
 
@@ -139,20 +140,8 @@ ws-icon-3 = 3;
 [module/spotify]
 type = custom/script
 exec = sh ~/.config/polybar/spotify.sh
-interval = 2
-
-[module/mpd]
-type = internal/mpd
-format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
-
-icon-prev = 
-icon-stop = 
-icon-play = 
-icon-pause = 
-icon-next = 
-
-label-song-maxlen = 25
-label-song-ellipsis = true
+tail = true
+interval = 0
 
 [module/xbacklight]
 type = internal/xbacklight
@@ -363,40 +352,6 @@ menu-0-1 = Reboot
 menu-0-1-exec = systemctl reboot
 menu-0-2 = Shutdown
 menu-0-2-exec = systemctl poweroff
-
-[module/nm]
-type = custom/script
-
-; Available tokens:
-;   %counter%
-; Command to be executed (using "/usr/bin/env sh -c [command]")
-exec = /usr/bin/env nm-applet
-
-; Conditional command that, if defined, needs to exit successfully
-; before the main exec command is invoked.
-; Default: ""
-exec-if = pgrep -x nm-applet
-
-; Will the script output continous content?
-; Default: false
-; tail = true
-
-; Seconds to sleep between updates
-; Default: 2 (0 if `tail = true`)
-; interval = 5
-
-; Available tags:
-;   <output> - deprecated
-;   <label> (default)
-format = <label>
-format-background = #999
-format-foreground = #000
-format-padding = 4
-
-; Available tokens:
-;   %output%
-; Default: %output%
-label = %output:0:15%...
 
 [settings]
 screenchange-reload = true
