@@ -63,7 +63,7 @@ font-4 = "IPAPMincho:pixelsize=11;2"
 
 modules-left = i3
 modules-center = spotify
-modules-right = wlan xbacklight volume xkeyboard battery date powermenu
+modules-right = wlan volume xkeyboard battery date powermenu
 
 
 ;tray-position = right
