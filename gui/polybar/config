@@ -28,6 +28,7 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/bar]
+monitor = ${env:MONITOR:}
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
 height = 40
@@ -140,8 +141,13 @@ ws-icon-3 = 3;
 [module/spotify]
 type = custom/script
 exec = sh ~/.config/polybar/spotify.sh
+
 tail = true
 interval = 0
+
+click-left = "playerctl play-pause"
+click-right = "playerctl next"
+click-middle = "playerctl previous"
 
 [module/xbacklight]
 type = internal/xbacklight
@@ -192,9 +198,9 @@ format-underline = #0a6cf5
 
 format-connected = <ramp-signal> <label-connected>
 ;format-connected-underline = #9f78e1
-label-connected = %{A1:bash ~/scripts/rofi_wifi_select.sh:} %essid% %{A}
+label-connected = %{A1:bash ~/scripts/rofi_wifi_select.sh &:} %essid% %{A}
 
-format-disconnected = %{A1:bash ~/scripts/rofi_wifi_select.sh:} Disconnected %{A}
+format-disconnected = %{A1:bash ~/scripts/rofi_wifi_select.sh &:} Disconnected %{A}
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected

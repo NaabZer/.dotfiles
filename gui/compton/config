@@ -127,7 +127,8 @@ alpha-step = 0.06;
 # blur-background-frame = true;
 # Do not let blur radius adjust based on window opacity.
 blur-background = true;
-blur-strength = 15
+#blur-strength = 15
+blur-strength = 7
 blur-background-exclude = [
     "window_type = 'dock'",
     "window_type = 'desktop'"
