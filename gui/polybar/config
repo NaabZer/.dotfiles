@@ -192,25 +192,16 @@ type = internal/network
 interface = wlp3s0
 interval = 3.0
 
-format-prefix = ""
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
-
 format-connected = <ramp-signal> <label-connected>
-;format-connected-underline = #9f78e1
 label-connected = %{A1:bash ~/scripts/rofi_wifi_select.sh &:} %essid% %{A}
 
 format-disconnected = %{A1:bash ~/scripts/rofi_wifi_select.sh &:} Disconnected %{A}
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
 
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
+ramp-signal-0 = %{A1:bash ~/scripts/rofi_wifi_select.sh &:}%{A}
+ramp-signal-1 = %{A1:bash ~/scripts/rofi_wifi_select.sh &:}%{A}
+ramp-signal-2 = %{A1:bash ~/scripts/rofi_wifi_select.sh &:}%{A}
+ramp-signal-3 = %{A1:bash ~/scripts/rofi_wifi_select.sh &:}%{A}
+ramp-signal-4 = %{A1:bash ~/scripts/rofi_wifi_select.sh &:}%{A}
 ramp-signal-0-foreground = ${colors.foreground-alt}
 ramp-signal-1-foreground = ${colors.foreground-alt}
 ramp-signal-2-foreground = ${colors.foreground-alt}
@@ -367,6 +358,7 @@ exec-if = ~/.config/polybar/bluetooth_on.sh
 interval = 0.1
 
 click-left = "bluetoothctl power off"
+click-right = "~/scripts/rofi_bt_select.sh &"
 
 format = <label>
 format-prefix = " "
