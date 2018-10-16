@@ -56,14 +56,14 @@ module-margin-left = 3
 module-margin-right = 0
 
 font-0 = Inconsolata-g:pixelsize=11;2
-font-1 = "FontAwesome:style=regular:pixelsize=15;3"
+font-1 = "FontAwesome:style=fa-fw:pixelsize=15;3"
 font-2 = Inconsolata-g:pixelsize=9;-12
 font-3 = Inconsolata-g:pixelsize=2;-12
 font-4 = "IPAPMincho:pixelsize=11;2"
 
 modules-left = i3
 modules-center = spotify
-modules-right = wlan volume xkeyboard battery date powermenu
+modules-right = bluetooth_on bluetooth_off wlan volume xkeyboard battery date powermenu
 
 
 ;tray-position = right
@@ -358,6 +358,32 @@ menu-0-1 = Reboot
 menu-0-1-exec = systemctl reboot
 menu-0-2 = Shutdown
 menu-0-2-exec = systemctl poweroff
+
+[module/bluetooth_on]
+type = custom/script
+exec = ~/.config/polybar/bluetooth_devices.sh
+exec-if = ~/.config/polybar/bluetooth_on.sh
+
+interval = 0.1
+
+click-left = "bluetoothctl power off"
+
+format = <label>
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+
+[module/bluetooth_off]
+type = custom/script
+exec = "echo Off"
+exec-if = ~/.config/polybar/bluetooth_off.sh
+
+interval = 0.1
+
+click-left = "bluetoothctl power on"
+
+format = <label>
+format-prefix = " "
+format-prefix-foreground = ${colors.secondary}
 
 [settings]
 screenchange-reload = true
