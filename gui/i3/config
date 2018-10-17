@@ -177,6 +177,11 @@ bindsym XF86AudioMicMute exec "amixer sset Capture toggle"
 bindsym XF86MonBrightnessDown exec "xbacklight -dec 5"
 bindsym XF86MonBrightnessUp exec "xbacklight -inc 5"
 
+# Bindings for audio buttons on BT headset
+bindsym XF86AudioPlay exec "playerctl play-pause"
+bindsym XF86AudioNext exec "playerctl next"
+bindsym XF86AudioPrev exec "playerctl previous"
+
 # GAPS
 for_window [class="^.*"] border pixel 0
 new_window pixel
