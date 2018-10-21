@@ -146,8 +146,8 @@ tail = true
 interval = 0
 
 click-left = "playerctl play-pause"
-click-right = "playerctl next"
-click-middle = "playerctl previous"
+click-right = "playerctl -a next"
+click-middle = "playerctl -a previous"
 
 [module/xbacklight]
 type = internal/xbacklight
