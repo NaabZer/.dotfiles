@@ -26,6 +26,7 @@
 ;alert = #bd2c40
 
 background = ${xrdb:background-alt:#000000}
+background-alt = ${xrdb:background:#000000}
 base00 = ${xrdb:color0:#000000}
 base01 = ${xrdb:color10:#000000}
 base02 = ${xrdb:color11:#000000}
@@ -120,7 +121,7 @@ label-mode-background = ${colors.background}
 
 ; focused = Active workspace on focused monitor
 label-focused = "%{T4} %{T3}%index:2%%{T-} %{T6}%icon%%{T-} %{T3}  %{T4}"
-label-focused-background = ${colors.background}
+label-focused-background = ${colors.background-alt}
 label-focused-foreground = ${colors.base0D}
 ;label-focused-underline = ${colors.secondary}
 label-focused-padding = 0
