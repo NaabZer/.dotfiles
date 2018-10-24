@@ -31,7 +31,7 @@ base00=$(cat gui/xresources/Xresources_col | grep "#define base00" | cut -d' ' -
 base01=$(cat gui/xresources/Xresources_col | grep "#define base01" | cut -d' ' -f3 | cut -c2-)
 
 $(echo "#define base00alpha #CC$base00" >> gui/xresources/Xresources_col)
-$(echo "#define base01alpha #CC$base00" >> gui/xresources/Xresources_col)
+$(echo "#define base01alpha #CC$base01" >> gui/xresources/Xresources_col)
 $(echo "*background: base00alpha" >> gui/xresources/Xresources_col)
 $(echo "*background-alt: base01alpha" >> gui/xresources/Xresources_col)
 
