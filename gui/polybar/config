@@ -229,7 +229,7 @@ ramp-volume-1-foreground = ${colors.base0D}
 ramp-volume-2-foreground = ${colors.base0D}
 
 label-muted =  muted
-label-muted-foreground = ${colors.foreground-alt}
+label-muted-foreground = ${colors.base0D}
 
 [module/battery]
 type = internal/battery
