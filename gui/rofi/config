@@ -2,36 +2,36 @@ rofi.location:  1
 rofi.width:     100
 rofi.font:      Inconsolata-g 13
 rofi.padding    0
-! Base16 Apathy
-! Author: Jannik Siebert (https://github.com/janniks)
+! Base16 Woodland
+! Author: Jay Cornwall (https://jcornwall.com)
 
-! base00: #031A16
-! base01: #0B342D
-! base02: #184E45
-! base03: #2B685E
-! base04: #5F9C92
-! base05: #81B5AC
-! base06: #A7CEC8
-! base07: #D2E7E4
-! base08: #3E9688
-! base09: #3E7996
-! base0A: #3E4C96
-! base0B: #883E96
-! base0C: #963E4C
-! base0D: #96883E
-! base0E: #4C963E
-! base0F: #3E965B
+! base00: #231e18
+! base01: #302b25
+! base02: #48413a
+! base03: #9d8b70
+! base04: #b4a490
+! base05: #cabcb1
+! base06: #d7c8bc
+! base07: #e4d4c8
+! base08: #d35c5c
+! base09: #ca7f32
+! base0A: #e0ac16
+! base0B: #b7ba53
+! base0C: #6eb958
+! base0D: #88a4d3
+! base0E: #bb90e2
+! base0F: #b49368
 
 ! Enable the extended coloring options
 rofi.color-enabled: true
 
 ! Property Name     BG       Border   Separator
-rofi.color-window:  #880B342D, #880B342D, #88031A16
+rofi.color-window:  #88302b25, #88302b25, #88231e18
 
 ! Property Name     BG       FG       BG-alt   Head-BG  Head-FG
-rofi.color-normal:  #000B342D, #81B5AC, #000B342D, #880B342D, #D2E7E4
-rofi.color-active:  #000B342D, #96883E, #000B342D, #880B342D, #96883E
-rofi.color-urgent:  #000B342D, #3E9688, #000B342D, #880B342D, #3E9688
+rofi.color-normal:  #00302b25, #cabcb1, #00302b25, #88302b25, #e4d4c8
+rofi.color-active:  #00302b25, #88a4d3, #00302b25, #88302b25, #88a4d3
+rofi.color-urgent:  #00302b25, #d35c5c, #00302b25, #88302b25, #d35c5c
 
 ! Set the desired separator style
 rofi.separator-style: solid

@@ -1,8 +1,6 @@
 ;==========================================================
 ;
 ;
-;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
-;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
 ;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
 ;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
 ;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
@@ -18,14 +16,32 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #aa222222
-background-alt = #444
+;background = #aa222222
+;background-alt = #444
 ;foreground = ${xrdb:color7:#222}
-foreground = #fff
-foreground-alt = #55aa55
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
+;foreground = #fff
+;foreground-alt = #55aa55
+;primary = #ffb52a
+;secondary = #e60053
+;alert = #bd2c40
+
+background = ${xrdb:background-alt:#000000}
+base00 = ${xrdb:color0:#000000}
+base01 = ${xrdb:color10:#000000}
+base02 = ${xrdb:color11:#000000}
+base03 = ${xrdb:color8:#000000}
+base04 = ${xrdb:color12:#000000}
+base05 = ${xrdb:color7:#000000}
+base06 = ${xrdb:color13:#000000}
+base07 = ${xrdb:color15:#000000}
+base08 = ${xrdb:color1:#000000}
+base09 = ${xrdb:color9#000000}
+base0A = ${xrdb:color3:#000000}
+base0B = ${xrdb:color2:#000000}
+base0C = ${xrdb:color6:#000000}
+base0D = ${xrdb:color4:#000000}
+base0E = ${xrdb:color5:#000000}
+base0F = ${xrdb:color14:#000000}
 
 [bar/bar]
 monitor = ${env:MONITOR:}
@@ -38,7 +54,7 @@ radius = 0
 fixed-center = true
 
 background = ${colors.background}
-foreground = ${colors.foreground}
+foreground = ${colors.base04}
 
 ;dim-value = 0.6
 
@@ -56,11 +72,12 @@ module-margin-left = 3
 module-margin-right = 0
 
 font-0 = Inconsolata-g:pixelsize=11;2
-font-1 = "FontAwesome:style=fa-fw:pixelsize=15;3"
+font-1 = "RobotoMonoNerdFont:pixelsize=20;5"
 font-2 = Inconsolata-g:pixelsize=9;-12
 font-3 = Inconsolata-g:pixelsize=2;-12
 font-4 = "IPAPMincho:pixelsize=11;2"
-
+font-5 = "RobotoMonoNerdFont:pixelsize=20;5"
+ 
 modules-left = i3
 modules-center = spotify
 modules-right = bluetooth_on bluetooth_off wlan volume xkeyboard battery date powermenu
@@ -82,16 +99,9 @@ type = internal/xkeyboard
 blacklist-0 = num lock
 
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
+format-prefix-foreground = ${colors.base0D}
 
 label-layout = %layout%
-label-layout-underline = ${colors.secondary}
-
-label-indicator-padding = 2
-label-indicator-margin = 1
-label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.secondary}
 
 [module/i3]
 type = internal/i3
@@ -106,28 +116,28 @@ pin-workspaces = true
 
 label-mode-padding = 0
 label-mode-foreground = #000
-label-mode-background = ${colors.primary}
+label-mode-background = ${colors.background}
 
 ; focused = Active workspace on focused monitor
-label-focused = "%{T4} %{T3}%index:2%%{T-} %icon% %{T3}  %{T4}"
-label-focused-background = ${colors.background-alt}
+label-focused = "%{T4} %{T3}%index:2%%{T-} %{T6}%icon%%{T-} %{T3}  %{T4}"
+label-focused-background = ${colors.background}
+label-focused-foreground = ${colors.base0D}
 ;label-focused-underline = ${colors.secondary}
 label-focused-padding = 0
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = "%{T4} %{T3}%index:2%%{T-} %icon% %{T3}  %{T4}"
+label-unfocused = "%{T4} %{T3}%index:2%%{T-} %{T6}%icon%%{T-} %{T3}  %{T4}"
 label-unfocused-padding = 0
 
 ; visible = Active workspace on unfocused monitor
-label-visible = "%{T4} %{T3}%index:2%%{T-} %icon% %{T3}  %{T4}"
+label-visible = "%{T4} %{T3}%index:2%%{T-} %{T6}%icon%%{T-} %{T3}  %{T4}"
 label-visible-background = ${self.label-focused-background}
 ; label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = 0
-label-visible-offset = 5
 
 ; urgent = Workspace with urgency hint set
-label-urgent = "%{T4} %{T3}%index:2%%{T-} %icon% %{T3}  %{T4}"
-label-urgent-background = ${colors.alert}
+label-urgent = "%{T4} %{T3}%index:2%%{T-} %{T6}%icon%%{T-} %{T3}  %{T4}"
+label-urgent-background = ${colors.base0C}
 label-urgent-padding = 0
 
 ws-icon-default = 
@@ -148,28 +158,6 @@ interval = 0
 click-left = "playerctl play-pause"
 click-right = "playerctl -a next"
 click-middle = "playerctl -a previous"
-
-[module/xbacklight]
-type = internal/xbacklight
-
-format = <label> <bar>
-label = BL
-
-bar-width = 10
-bar-indicator = |
-bar-indicator-foreground = #ff
-bar-indicator-font = 2
-bar-fill = ─
-bar-fill-font = 2
-bar-fill-foreground = #9f78e1
-bar-empty = ─
-bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
-
-[module/backlight-acpi]
-inherit = module/xbacklight
-type = internal/backlight
-card = intel_backlight
 
 [module/cpu]
 type = internal/cpu
@@ -202,27 +190,11 @@ ramp-signal-1 = %{A1:bash ~/scripts/rofi_wifi_select.sh &:}%{A}
 ramp-signal-2 = %{A1:bash ~/scripts/rofi_wifi_select.sh &:}%{A}
 ramp-signal-3 = %{A1:bash ~/scripts/rofi_wifi_select.sh &:}%{A}
 ramp-signal-4 = %{A1:bash ~/scripts/rofi_wifi_select.sh &:}%{A}
-ramp-signal-0-foreground = ${colors.foreground-alt}
-ramp-signal-1-foreground = ${colors.foreground-alt}
-ramp-signal-2-foreground = ${colors.foreground-alt}
-ramp-signal-3-foreground = ${colors.foreground-alt}
-ramp-signal-4-foreground = ${colors.foreground-alt}
-
-[module/eth]
-type = internal/network
-interface = 
-interval = 3.0
-
-format-connected-underline = #55aa55
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %local_ip%
-
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
+ramp-signal-0-foreground = ${colors.base0D}
+ramp-signal-1-foreground = ${colors.base0D}
+ramp-signal-2-foreground = ${colors.base0D}
+ramp-signal-3-foreground = ${colors.base0D}
+ramp-signal-4-foreground = ${colors.base0D}
 
 [module/date]
 type = internal/date
@@ -235,49 +207,28 @@ time = %H:%M
 time-alt = %H:%M:%S
 
 format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.base0D}
 format-underline = #0a6cf5
 
 label = %date% %time%
 
 [module/volume]
-type = internal/alsa
+type = internal/pulseaudio
 
-format-volume = <label-volume> <bar-volume> <ramp-volume>
-;format-volume = <bar-volume>
-;label-volume = VOL
-;label-volume-foreground = ${root.foreground}
+format-volume = <ramp-volume> <label-volume>
+format-muted = <label-muted>
 
-format-muted= <label-muted> <ramp-volume>
-format-muted-foreground = ${colors.foreground-alt}
-label-muted = Muted
-label-muted-padding-left = 4
-label-muted-padding-right = 5
-label-muted-foreground = #66
+label-volume = %percentage%%
 
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground}
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-0-foreground = ${colors.base0D}
+ramp-volume-1-foreground = ${colors.base0D}
+ramp-volume-2-foreground = ${colors.base0D}
 
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
-
-ramp-headphones-0 = 
-ramp-headphones-1 = 
+label-muted =  muted
+label-muted-foreground = ${colors.foreground-alt}
 
 [module/battery]
 type = internal/battery
@@ -300,14 +251,14 @@ ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
-ramp-capacity-foreground = ${colors.foreground-alt}
+ramp-capacity-foreground = ${colors.base0D}
 
 animation-charging-0 = 
 animation-charging-1 = 
 animation-charging-2 = 
 animation-charging-3 = 
 animation-charging-4 = 
-animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-foreground = ${colors.base0D}
 animation-charging-framerate = 750
 
 [module/temperature]
@@ -337,11 +288,11 @@ format-spacing = 1
 expand-right = false
 
 label-open = 
-label-open-foreground = ${colors.secondary}
+label-open-foreground = ${colors.base0C}
 label-close =  Cancel
-label-close-foreground = ${colors.secondary}
+label-close-foreground = ${colors.base0C}
 label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
+label-separator-foreground = ${colors.base05}
 
 menu-0-0 = Logout 
 menu-0-0-exec = exit
@@ -362,7 +313,7 @@ click-right = "~/scripts/rofi_bt_select.sh &"
 
 format = <label>
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.base0D}
 
 [module/bluetooth_off]
 type = custom/script
@@ -375,7 +326,7 @@ click-left = "bluetoothctl power on"
 
 format = <label>
 format-prefix = " "
-format-prefix-foreground = ${colors.secondary}
+format-prefix-foreground = ${colors.base0C}
 
 [settings]
 screenchange-reload = true

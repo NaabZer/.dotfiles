@@ -24,5 +24,18 @@ sed -i -r "/^rofi.color-(window|enabled)/! s/rofi.color-(.*):.*#(.*), #(.*), #(.
 $(cat gui/rofi/base gui/rofi/colors > gui/rofi/config)
 
     
+# Download xrdb colors
+xrdburl="https://raw.githubusercontent.com/chriskempson/base16-xresources/master/xresources/base16-${colorscheme}.Xresources"
+$(curl $xrdburl > gui/xresources/Xresources_col)
+base00=$(cat gui/xresources/Xresources_col | grep "#define base00" | cut -d' ' -f3 | cut -c2-)
+base01=$(cat gui/xresources/Xresources_col | grep "#define base01" | cut -d' ' -f3 | cut -c2-)
+
+$(echo "#define base00alpha #CC$base00" >> gui/xresources/Xresources_col)
+$(echo "#define base01alpha #CC$base00" >> gui/xresources/Xresources_col)
+$(echo "*background: base00alpha" >> gui/xresources/Xresources_col)
+$(echo "*background-alt: base01alpha" >> gui/xresources/Xresources_col)
+
+$(cat gui/xresources/Xresources_base gui/xresources/Xresources_col > gui/xresources/Xresources)
+
 
 

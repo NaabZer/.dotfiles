@@ -1,49 +1,49 @@
 [colors]
-# Base16 Apathy
-# Author: Jannik Siebert (https://github.com/janniks)
+# Base16 Woodland
+# Author: Jay Cornwall (https://jcornwall.com)
 
-foreground          = #81B5AC
-foreground_bold     = #A7CEC8
-cursor              = #A7CEC8
-cursor_foreground   = #031A16
-background          = rgba(3, 26, 22, 0.8)
+foreground          = #cabcb1
+foreground_bold     = #d7c8bc
+cursor              = #d7c8bc
+cursor_foreground   = #231e18
+background          = rgba(35, 30, 24, 0.8)
 
 # 16 color space
 
 # Black, Gray, Silver, White
-color0  = #031A16
-color8  = #2B685E
-color7  = #81B5AC
-color15 = #D2E7E4
+color0  = #231e18
+color8  = #9d8b70
+color7  = #cabcb1
+color15 = #e4d4c8
 
 # Red
-color1  = #3E9688
-color9  = #3E9688
+color1  = #d35c5c
+color9  = #d35c5c
 
 # Green
-color2  = #883E96
-color10 = #883E96
+color2  = #b7ba53
+color10 = #b7ba53
 
 # Yellow
-color3  = #3E4C96
-color11 = #3E4C96
+color3  = #e0ac16
+color11 = #e0ac16
 
 # Blue
-color4  = #96883E
-color12 = #96883E
+color4  = #88a4d3
+color12 = #88a4d3
 
 # Purple
-color5  = #4C963E
-color13 = #4C963E
+color5  = #bb90e2
+color13 = #bb90e2
 
 # Teal
-color6  = #963E4C
-color14 = #963E4C
+color6  = #6eb958
+color14 = #6eb958
 
 # Extra colors
-color16 = #3E7996
-color17 = #3E965B
-color18 = #0B342D
-color19 = #184E45
-color20 = #5F9C92
-color21 = #A7CEC8
+color16 = #ca7f32
+color17 = #b49368
+color18 = #302b25
+color19 = #48413a
+color20 = #b4a490
+color21 = #d7c8bc
