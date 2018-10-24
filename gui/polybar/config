@@ -15,18 +15,8 @@
 ;==========================================================
 
 [colors]
-;background = ${xrdb:color0:#222}
-;background = #aa222222
-;background-alt = #444
-;foreground = ${xrdb:color7:#222}
-;foreground = #fff
-;foreground-alt = #55aa55
-;primary = #ffb52a
-;secondary = #e60053
-;alert = #bd2c40
-
-background = ${xrdb:background-alt:#000000}
-background-alt = ${xrdb:background:#000000}
+background = ${xrdb:background-alt-trans:#000000}
+background-alt = ${xrdb:background-trans:#000000}
 base00 = ${xrdb:color0:#000000}
 base01 = ${xrdb:color10:#000000}
 base02 = ${xrdb:color11:#000000}
@@ -244,7 +234,7 @@ format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
 format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
+format-full-prefix-foreground = ${colors.base04}
 format-full-underline = ${self.format-charging-underline}
 
 ramp-capacity-0 = 
