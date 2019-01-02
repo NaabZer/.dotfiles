@@ -103,7 +103,7 @@ set $ws5 "5: "
 set $ws6 "6: "
 set $ws7 "7: "
 set $ws8 "8: "
-set $ws9 "9: "
+set $ws9 "9: steam"
 set $ws10 "10: spotify"
 
 # switch to workspace
@@ -198,7 +198,14 @@ bindsym $mod+o exec $HOME/scripts/dim_screen_lock.sh
 # Assign specific programs to workspaces
 for_window [class="Chromium"] move to workspace number $ws2
 for_window [class="Spotify"] move to workspace number $ws10
+for_window [class="Steam"] move to workspace number $ws9
 for_window [class="Termite" title="UNITY$"] move to workspace number $ws3 #Unity vim
+
+# Space steam
+for_window [class="Steam" Title="*News*"] floating enable
+for_window [class="Steam" Title="Friends List"] floating disable
+for_window [class="Steam" Title="Friends List"] resize set width 400px
+for_window [class="Steam" Title="Steam"] floating disable
 
 # --- STARTUP THINGS ---
 # Start polybar

@@ -1,6 +1,6 @@
 #!/bin/bash
-status=`exec playerctl status 2> /dev/null`
-youtube=`exec playerctl -l | grep youtube`
+status=$(playerctl status 2> /dev/null)
+youtube=$(playerctl -l | grep youtube)
 
 if [ ! "$status" = "" ] && [ "$youtube" == "" ]; then
     title=`exec playerctl metadata xesam:title`
