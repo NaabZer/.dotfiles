@@ -121,6 +121,11 @@ alpha-step = 0.06;
 opacity-rule = [
     "99:class_g = 'Steam'",
     "99:class_g = 'Chromium'",
+    "0:_NET_WM_STATE@[0]:32a = '_NET_WM_STATE_HIDDEN'",
+    "0:_NET_WM_STATE@[1]:32a = '_NET_WM_STATE_HIDDEN'",
+    "0:_NET_WM_STATE@[2]:32a = '_NET_WM_STATE_HIDDEN'",
+    "0:_NET_WM_STATE@[3]:32a = '_NET_WM_STATE_HIDDEN'",
+    "0:_NET_WM_STATE@[4]:32a = '_NET_WM_STATE_HIDDEN'"
 ]
 
 # Dim inactive windows. (0.0 - 1.0)
@@ -153,7 +158,7 @@ fade-delta = 4;
 # Opacity change between steps while fading in. (default 0.028).
 fade-in-step = 0.03;
 # Opacity change between steps while fading out. (default 0.03).
-fade-out-step = 0.03;
+fade-out-step = 0.05;
 # Fade windows in/out when opening/closing
 # no-fading-openclose = true;
 
