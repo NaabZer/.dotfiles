@@ -37,5 +37,6 @@ $(echo "*background-alt-trans: base01alpha" >> gui/xresources/Xresources_col)
 
 $(cat gui/xresources/Xresources_base gui/xresources/Xresources_col > gui/xresources/Xresources)
 
-
-
+# Download Zathura colors
+zathuraurl="https://raw.githubusercontent.com/nicodebo/base16-zathura/master/build_schemes/base16-${colorscheme}.config"
+$(curl $zathuraurl > gui/zathura/zathurarc)
