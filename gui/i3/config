@@ -30,7 +30,8 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec termite
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -212,7 +213,10 @@ for_window [class="Steam" Title="Steam"] floating disable
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Get wallpaper
-exec_always --no-startup-id feh --bg-fill $HOME/Downloads/Golden_Pav_Green.jpg
+# exec_always --no-startup-id feh --bg-fill $HOME/Downloads/Golden_Pav_Green.jpg
+# exec_always --no-startup-id feh --bg-fill $HOME/Downloads/matrix.png
+#exec_always --no-startup-id feh --bg-fill $HOME/Downloads/pastel.jpeg
+exec_always --no-startup-id feh --bg-fill $HOME/Downloads/pastel-grad.jpg
 
 # Start compositor
 exec_always compton --config $HOME/.config/compton.conf -b --blur-method kawase
