@@ -43,9 +43,9 @@ battery_print() {
         icon="#1"
 
         if [ "$battery_percent" -gt 97 ]; then
-            echo "%{F$icon_color} $icon %{F-}"
+            echo "%{F$icon_color}$icon %{F-}"
         else
-            echo "%{F$icon_color} $icon %{F-}$battery_percent%"
+            echo "%{F$icon_color}$icon %{F-}$battery_percent%"
         fi
     else
         if [ "$battery_percent" -gt 85 ]; then
@@ -60,7 +60,7 @@ battery_print() {
             icon=""
         fi
 
-        echo "%{F$icon_color} $icon %{F-}$battery_percent%"
+        echo "%{F$icon_color}$icon %{F-}$battery_percent%"
     fi
 }
 
