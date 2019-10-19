@@ -221,6 +221,11 @@ label-muted =  muted
 label-muted-foreground = ${colors.base0D}
 
 [module/battery]
+type = custom/script
+exec = sh ~/.config/polybar/battery-combined-udev.sh
+tail = true
+
+[module/battery_old]
 type = internal/battery
 battery = BAT0
 adapter = AC0
