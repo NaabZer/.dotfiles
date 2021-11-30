@@ -10,13 +10,13 @@
     red:                         rgba ( 216, 19, 127, 100 % );
     blue:                        rgba ( 121, 106, 245, 100 % );
     lightfg:                     rgba ( 216, 215, 218, 100 % );
-    lightbg:                     rgba ( 74, 70, 77, 50 % );
+    lightbg:                     rgba ( 74, 70, 77, 0 % );
     foreground:                  rgba ( 188, 186, 190, 100 % );
-    background:                  rgba ( 46, 42, 49, 50 % );
+    background:                  rgba ( 46, 42, 49, 0 % );
     background-color:            rgba ( 46, 42, 49, 0 % );
     separatorcolor:              @foreground;
     border-color:                @foreground;
-    selected-normal-foreground:  @lightbg;
+    selected-normal-foreground:  @black;
     selected-normal-background:  @lightfg;
     selected-active-foreground:  @background;
     selected-active-background:  @blue;

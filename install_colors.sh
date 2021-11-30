@@ -21,8 +21,9 @@ echo "downloading colorscheme for rofi"
 $(curl $rofiurl > gui/rofi/color.rasi)
 
 #Add opacity to colorscheme
-perl -p -i -e "s/(?<=lightbg:\s{1,30}rgba \( \d{1,3}, \d{1,3}, \d{1,3}, )100 %/50 %/g" "gui/rofi/color.rasi"
-perl -p -i -e "s/(?<=background:\s{1,20}rgba \( \d{1,3}, \d{1,3}, \d{1,3}, )100 %/50 %/g" "gui/rofi/color.rasi"
+perl -p -i -e "s/(?<=lightbg:\s{1,30}rgba \( \d{1,3}, \d{1,3}, \d{1,3}, )100 %/0 %/g" "gui/rofi/color.rasi"
+perl -p -i -e "s/(?<=background:\s{1,20}rgba \( \d{1,3}, \d{1,3}, \d{1,3}, )100 %/0 %/g" "gui/rofi/color.rasi"
+perl -p -i -e "s/(?<=selected\-normal\-foreground:\s{2})\@lightbg/\@black/g" "gui/rofi/color.rasi"
     
 # Download xrdb colors
 xrdburl="https://raw.githubusercontent.com/chriskempson/base16-xresources/master/xresources/base16-${colorscheme}.Xresources"
