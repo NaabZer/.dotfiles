@@ -7,7 +7,10 @@ termiteurl="https://raw.githubusercontent.com/khamer/base16-termite/master/theme
 echo "downloading colorscheme for termite"
 $(curl $termiteurl > terminal/termite/colors)
 #Add opacity to colorscheme
-sed -i -r "s/rgba\((.*)\)/rgba\(\1\, 0.8\)/g" "terminal/termite/colors"
+hex=$(perl -lne "while(/(?<=background\s{10}=\s#)\w+/g){print $&;}" "terminal/termite/colors")
+rgba=$(printf "rgba(%d, %d, %d, 0.8)\n" 0x${hex:0:2} 0x${hex:2:2} 0x${hex:4:2})
+perl -p -i -e "s/(?<=background\s{10}=\s)#\w+/$rgba/g" "terminal/termite/colors"
+# sed -i -r "s/(?<=(background\s*=\s*))#(.{2})(.{2})(.{2})/rgba(
 
 $(cat terminal/termite/base terminal/termite/colors > terminal/termite/config)
 
