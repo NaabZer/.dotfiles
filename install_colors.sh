@@ -13,16 +13,13 @@ $(cat terminal/termite/base terminal/termite/colors > terminal/termite/config)
 
 
 # Download rofi colors
-rofiurl="https://raw.githubusercontent.com/0xdec/base16-rofi/master/themes/base16-${colorscheme}.config"
+rofiurl="https://gitlab.com/jordiorlando/base16-rofi/-/raw/master/themes/base16-${colorscheme}.rasi"
 echo "downloading colorscheme for rofi"
-$(curl $rofiurl > gui/rofi/colors)
+$(curl $rofiurl > gui/rofi/color.rasi)
 
 #Add opacity to colorscheme
-sed -i -r "s/rofi.color-window:.*#(.*), #(.*), #(.*)/rofi.color-window:  #88\1, #88\2, #88\3/g" "gui/rofi/colors"
-sed -i -r "/^rofi.color-(window|enabled)/! s/rofi.color-(.*):.*#(.*), #(.*), #(.*), #(.*), #(.*)/rofi.color-\1:  #00\2, #\3, #00\4, #88\5, #\6/g" "gui/rofi/colors"
-
-$(cat gui/rofi/base gui/rofi/colors > gui/rofi/config)
-
+perl -p -i -e "s/(?<=lightbg:\s{1,30}rgba \( \d{1,3}, \d{1,3}, \d{1,3}, )100 %/50 %/g" "gui/rofi/color.rasi"
+perl -p -i -e "s/(?<=background:\s{1,20}rgba \( \d{1,3}, \d{1,3}, \d{1,3}, )100 %/50 %/g" "gui/rofi/color.rasi"
     
 # Download xrdb colors
 xrdburl="https://raw.githubusercontent.com/chriskempson/base16-xresources/master/xresources/base16-${colorscheme}.Xresources"

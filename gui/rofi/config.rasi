@@ -1,0 +1,7 @@
+configuration{
+    location:   1;
+    width:      100;
+    font:       "Inconsolata-g 13";
+    padding:    0;
+}
+@theme "color"
