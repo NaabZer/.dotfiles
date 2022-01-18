@@ -220,7 +220,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id feh --bg-fill $HOME/Downloads/pastel-grad.jpg
 
 # Start compositor
-exec_always compton --config $HOME/.config/compton.conf -b --blur-method kawase
+exec_always --no-startup-id $HOME/.config/compton/launch.sh
 
 # I've never not used chromium, might as well have it to get desktop notifications
 exec chromium
