@@ -14,6 +14,7 @@
 ;
 ;==========================================================
 
+
 [colors]
 background = ${xrdb:background-alt-trans:#000000}
 background-alt = ${xrdb:background-trans:#000000}
@@ -136,11 +137,12 @@ ws-icon-0 = spotify;
 ws-icon-1 = 1: ;
 ws-icon-2 = 2;
 ws-icon-3 = 3;
-ws-icon-4 = steam;
+ws-icon-4 = 8;
+ws-icon-5 = steam;
 
 [module/spotify]
 type = custom/script
-exec = sh ~/.config/polybar/spotify.sh
+exec = bash ~/.config/polybar/spotify.sh
 
 tail = true
 interval = 0
