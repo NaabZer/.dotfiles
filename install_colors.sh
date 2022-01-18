@@ -41,3 +41,6 @@ $(cat gui/xresources/Xresources_base gui/xresources/Xresources_col > gui/xresour
 # Download Zathura colors
 zathuraurl="https://raw.githubusercontent.com/HaoZeke/base16-zathura/main/build_schemes/colors/base16-${colorscheme}.config"
 $(curl $zathuraurl > gui/zathura/zathurarc)
+
+# apply base16-shell
+$(./terminal/base16-shell/scripts/base16-${colorscheme})
