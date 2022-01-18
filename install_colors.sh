@@ -2,6 +2,12 @@
 
 . base16colorscheme.conf
 
+# Download alacritty colors
+alacrittyurl="https://raw.githubusercontent.com/aarowill/base16-alacritty/master/colors/base16-${colorscheme}.yml"
+echo "downloading colorscheme for alacritty"
+$(curl $alacrittyurl > terminal/alacritty/colors)
+$(cat terminal/alacritty/base terminal/alacritty/colors > terminal/alacritty/alacritty.yml)
+
 # Download termite colors
 termiteurl="https://raw.githubusercontent.com/khamer/base16-termite/master/themes/base16-${colorscheme}.config"
 echo "downloading colorscheme for termite"
