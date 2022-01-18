@@ -171,9 +171,9 @@ bindsym $mod+r mode "resize"
 ## Non-standard shit
 
 # Bindings for thinkpad fn buttons
-bindsym XF86AudioMute exec "amixer sset Master toggle"
-bindsym XF86AudioLowerVolume exec "amixer sset Master 5%-"
-bindsym XF86AudioRaiseVolume exec "amixer sset Master 5%+"
+bindsym XF86AudioMute exec "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+bindsym XF86AudioLowerVolume exec "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+bindsym XF86AudioRaiseVolume exec "pactl set-sink-volume @DEFAULT_SINK@ +5%"
 bindsym XF86AudioMicMute exec "amixer sset Capture toggle"
 bindsym XF86MonBrightnessDown exec "xbacklight -dec 5"
 bindsym XF86MonBrightnessUp exec "xbacklight -inc 5"
