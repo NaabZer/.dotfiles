@@ -199,6 +199,7 @@ bindsym $mod+o exec $HOME/scripts/dim_screen_lock.sh
 # Assign specific programs to workspaces
 for_window [class="Chromium"] move to workspace number $ws2
 for_window [class="Spotify"] move to workspace number $ws10
+for_window [class="Slack"] move to workspace number $ws8
 for_window [class="Steam"] move to workspace number $ws9
 for_window [class="Termite" title="UNITY$"] move to workspace number $ws3 #Unity vim
 
