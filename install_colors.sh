@@ -32,7 +32,7 @@ perl -p -i -e "s/(?<=background:\s{1,20}rgba \( \d{1,3}, \d{1,3}, \d{1,3}, )100 
 perl -p -i -e "s/(?<=selected\-normal\-foreground:\s{2})\@lightbg/\@black/g" "gui/rofi/color.rasi"
     
 # Download xrdb colors
-xrdburl="https://raw.githubusercontent.com/chriskempson/base16-xresources/master/xresources/base16-${colorscheme}.Xresources"
+xrdburl="https://raw.githubusercontent.com/pinpox/base16-xresources/master/xresources/base16-${colorscheme}.Xresources"
 $(curl $xrdburl > gui/xresources/Xresources_col)
 base00=$(cat gui/xresources/Xresources_col | grep "#define base00" | cut -d' ' -f3 | cut -c2-)
 base01=$(cat gui/xresources/Xresources_col | grep "#define base01" | cut -d' ' -f3 | cut -c2-)
@@ -49,4 +49,15 @@ zathuraurl="https://raw.githubusercontent.com/HaoZeke/base16-zathura/main/build_
 $(curl $zathuraurl > gui/zathura/zathurarc)
 
 # apply base16-shell
-$(./terminal/base16-shell/scripts/base16-${colorscheme})
+script=~/.config/base16-shell/scripts/base16-${colorscheme}.sh
+[ -f $script ] && . $script
+echo $script
+ln -fs $script ~/.base16_theme
+echo -e "if \0041exists('g:colors_name') || g:colors_name != 'base16-$colorscheme'\n  colorscheme base16-$colorscheme\nendif" >| ~/.vimrc_background
+if [ -n ${BASE16_SHELL_HOOKS:+s} ] && [ -d "${BASE16_SHELL_HOOKS}" ]; then
+    for hook in $BASE16_SHELL_HOOKS/*; do
+      [ -f "$hook" ] && [ -x "$hook" ] && "$hook"
+    done
+fi
+
+export BASE16_THEME=${colorscheme}

@@ -4,7 +4,6 @@
         create: true
 - shell:
     - bash install_colors.sh
-    - xrdb -load gui/xresources/Xresources
 - clean: ['~']
 
 - link:
@@ -18,5 +17,6 @@
     ~/.config/alacritty: terminal/alacritty
     ~/.config/base16-shell: terminal/base16-shell
 - shell:
-    - killall -USR1 termite
+    - xrdb -load ~/.Xresources
+    - killall -USR1 i3-sensible-terminal
     - gui/polybar/launch.sh

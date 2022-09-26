@@ -189,6 +189,7 @@ bindsym XF86AudioRaiseVolume exec "pactl set-sink-volume @DEFAULT_SINK@ +5%"
 bindsym XF86AudioMicMute exec "amixer sset Capture toggle"
 bindsym XF86MonBrightnessDown exec "xbacklight -dec 5"
 bindsym XF86MonBrightnessUp exec "xbacklight -inc 5"
+bindsym XF86Bluetooth exec "$HOME/.config/i3/bluetooth_toggle.sh"
 
 # Bindings for audio buttons on BT headset
 bindsym XF86AudioPlay exec "playerctl play-pause"
@@ -196,7 +197,7 @@ bindsym XF86AudioNext exec "playerctl -a next"
 bindsym XF86AudioPrev exec "playerctl -a previous"
 
 # GAPS
-for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 2
 new_window pixel
 gaps inner 8
 gaps outer 0
@@ -223,7 +224,7 @@ for_window [class="Steam" Title="Steam"] floating disable
 
 # --- STARTUP THINGS ---
 # Start polybar
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id $HOME/.dotfiles/gui/polybar/launch.sh
 
 # Get wallpaper
 # exec_always --no-startup-id feh --bg-fill $HOME/Downloads/Golden_Pav_Green.jpg
@@ -232,7 +233,32 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id feh --bg-fill $HOME/Downloads/pastel-grad.jpg
 
 # Start compositor
-exec_always --no-startup-id $HOME/.config/compton/launch.sh
+exec_always --no-startup-id $HOME/.dotfiles/gui/compton/launch.sh
 
 # I've never not used chromium, might as well have it to get desktop notifications
-exec chromium
+# exec chromium
+smart_borders on
+
+set $base00 #2e2a3130
+set $base01 #4a464d30
+set $base02 #66636930
+set $base03 #83808530
+set $base04 #9f9da230
+set $base05 #bcbabeff
+set $base06 #d8d7da30
+set $base07 #f5f4f730
+set $base08 #d8137f30
+set $base09 #d6540730
+set $base0A #dc8a0e30
+set $base0B #17ad9830
+set $base0C #149bda30
+set $base0D #796af5ff
+set $base0E #bb60ea30
+set $base0F #c720ca30
+
+# Basic color configuration using the Base16 variables for windows and borders.
+# Property Name         Border  BG      Text    Indicator Child Border
+client.focused          $base05 $base0D $base00 $base0D $base0C
+client.focused_inactive $base01 $base01 $base05 $base03 $base01
+client.unfocused        $base01 $base00 $base05 $base01 $base01
+client.urgent           $base08 $base08 $base00 $base08 $base08
