@@ -1,4 +1,7 @@
+[submodule "dotbot"]
 	path = dotbot
-	url = git@github.com:anishathalye/dotbot.git
+	url = https://github.com/anishathalye/dotbot
+	ignore = dirty
+[submodule "base16-shell"]
 	path = terminal/base16-shell
 	url = git@github.com:chriskempson/base16-shell.git

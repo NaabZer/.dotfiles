@@ -19,7 +19,8 @@ perl -p -i -e "s/(?<=background:\s{1,20}rgba \( \d{1,3}, \d{1,3}, \d{1,3}, )100 
 perl -p -i -e "s/(?<=selected\-normal\-foreground:\s{2})\@lightbg/\@black/g" "gui/rofi/color.rasi"
     
 # Download xrdb colors
-xrdburl="https://raw.githubusercontent.com/pinpox/base16-xresources/master/xresources/base16-${colorscheme}.Xresources"
+#xrdburl="https://raw.githubusercontent.com/janoamaral/Xresources-themes/master/base16-${colorscheme}.Xresources"
+xrdburl="https://raw.githubusercontent.com/tinted-theming/tinted-xresources/refs/heads/main/xresources/base16-${colorscheme}.Xresources"
 $(curl $xrdburl > gui/xresources/Xresources_col)
 base00=$(cat gui/xresources/Xresources_col | grep "#define base00" | cut -d' ' -f3 | cut -c2-)
 base01=$(cat gui/xresources/Xresources_col | grep "#define base01" | cut -d' ' -f3 | cut -c2-)
