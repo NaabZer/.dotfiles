@@ -1,19 +1,19 @@
 /**
- * Base16 Unikitty Dark ROFI Color theme
+ * Base16 Apathy ROFI Color theme
  *
  * Authors
- *  Scheme: Josh W Lewis (@joshwlewis)
+ *  Scheme: Jannik Siebert (https://github.com/janniks)
  *  Template: Jordi Pakey-Rodriguez (https://github.com/0xdec), Andrea Scarpino (https://github.com/ilpianista)
  */
 
 * {
-    red:                         rgba ( 216, 19, 127, 100 % );
-    blue:                        rgba ( 121, 106, 245, 100 % );
-    lightfg:                     rgba ( 216, 215, 218, 100 % );
-    lightbg:                     rgba ( 74, 70, 77, 0 % );
-    foreground:                  rgba ( 188, 186, 190, 100 % );
-    background:                  rgba ( 46, 42, 49, 0 % );
-    background-color:            rgba ( 46, 42, 49, 0 % );
+    red:                         rgba ( 62, 150, 136, 100 % );
+    blue:                        rgba ( 150, 136, 62, 100 % );
+    lightfg:                     rgba ( 167, 206, 200, 100 % );
+    lightbg:                     rgba ( 11, 52, 45, 0 % );
+    foreground:                  rgba ( 129, 181, 172, 100 % );
+    background:                  rgba ( 3, 26, 22, 0 % );
+    background-color:            rgba ( 3, 26, 22, 0 % );
     separatorcolor:              @foreground;
     border-color:                @foreground;
     selected-normal-foreground:  @black;

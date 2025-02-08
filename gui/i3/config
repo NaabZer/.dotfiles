@@ -68,17 +68,17 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# move focused workspace
-bindsym $mod+Control+h move workspace to output left
-bindsym $mod+Control+j move workspace to output down
-bindsym $mod+Control+k move workspace to output up
-bindsym $mod+Control+l move workspace to output right
+# move workspace 
+bindsym $mod+Shift+Ctrl+h move workspace to output left
+bindsym $mod+Shift+Ctrl+j move workspace to output down
+bindsym $mod+Shift+Ctrl+k move workspace to output up
+bindsym $mod+Shift+Ctrl+l move workspace to output right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Control+Left move workspace to output left
-bindsym $mod+Control+Down move workspace to output down
-bindsym $mod+Control+Up move workspace to output up
-bindsym $mod+Control+Right move workspace to output right
+bindsym $mod+Shift+Ctrl+Left move workspace to output left
+bindsym $mod+Shift+Ctrl+Down move workspace to output down
+bindsym $mod+Shift+Ctrl+Up move workspace to output up
+bindsym $mod+Shift+Ctrl+Right move workspace to output right
 
 # split in horizontal orientation
 bindsym $mod+g split h
@@ -98,10 +98,13 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+m focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
+
+# change focus between tiling / floating windows
+bindsym $mod+space exec "bash $HOME/.dotfiles/gui/i3/todoist_add.sh"
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -115,7 +118,7 @@ set $ws4 "4: "
 set $ws5 "5: "
 set $ws6 "6: "
 set $ws7 "7: "
-set $ws8 "8: "
+set $ws8 "8: todoist"
 set $ws9 "9: steam"
 set $ws10 "10: spotify"
 
@@ -187,8 +190,8 @@ bindsym XF86AudioMute exec "pactl set-sink-mute @DEFAULT_SINK@ toggle"
 bindsym XF86AudioLowerVolume exec "pactl set-sink-volume @DEFAULT_SINK@ -5%"
 bindsym XF86AudioRaiseVolume exec "pactl set-sink-volume @DEFAULT_SINK@ +5%"
 bindsym XF86AudioMicMute exec "amixer sset Capture toggle"
-bindsym XF86MonBrightnessDown exec "xbacklight -dec 5"
-bindsym XF86MonBrightnessUp exec "xbacklight -inc 5"
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
 bindsym XF86Bluetooth exec "$HOME/.config/i3/bluetooth_toggle.sh"
 
 # Bindings for audio buttons on BT headset
@@ -214,10 +217,11 @@ for_window [class="Chromium"] move to workspace number $ws2
 for_window [class="Spotify"] move to workspace number $ws10
 for_window [class="Slack"] move to workspace number $ws8
 for_window [class="Steam"] move to workspace number $ws9
+for_window [class="Todoist"] move to workspace number $ws8
 for_window [class="Termite" title="UNITY$"] move to workspace number $ws3 #Unity vim
 
 # Space steam
-for_window [class="Steam" Title="*News*"] floating enable
+for_window [class="Steam" Title=".*News.*"] floating enable
 for_window [class="Steam" Title="Friends List"] floating disable
 for_window [class="Steam" Title="Friends List"] resize set width 400px
 for_window [class="Steam" Title="Steam"] floating disable
@@ -226,39 +230,18 @@ for_window [class="Steam" Title="Steam"] floating disable
 # Start polybar
 exec_always --no-startup-id $HOME/.dotfiles/gui/polybar/launch.sh
 
+exec_always --no-startup-id fcitx5
+
 # Get wallpaper
-# exec_always --no-startup-id feh --bg-fill $HOME/Downloads/Golden_Pav_Green.jpg
+exec_always --no-startup-id feh --bg-fill $HOME/Downloads/Golden_Pav_Green.jpg
 # exec_always --no-startup-id feh --bg-fill $HOME/Downloads/matrix.png
-#exec_always --no-startup-id feh --bg-fill $HOME/Downloads/pastel.jpeg
-exec_always --no-startup-id feh --bg-fill $HOME/Downloads/pastel-grad.jpg
+# exec_always --no-startup-id feh --bg-fill $HOME/Downloads/pastel.jpeg
+# exec_always --no-startup-id feh --bg-fill $HOME/Downloads/pastel-grad.jpg
 
 # Start compositor
-exec_always --no-startup-id $HOME/.dotfiles/gui/compton/launch.sh
+#exec_always picom --config $HOME/.config/picom.conf -b --blur-method kawase
+exec_always picom --blur-method dual_kawase
 
 # I've never not used chromium, might as well have it to get desktop notifications
-# exec chromium
-smart_borders on
-
-set $base00 #2e2a3130
-set $base01 #4a464d30
-set $base02 #66636930
-set $base03 #83808530
-set $base04 #9f9da230
-set $base05 #bcbabeff
-set $base06 #d8d7da30
-set $base07 #f5f4f730
-set $base08 #d8137f30
-set $base09 #d6540730
-set $base0A #dc8a0e30
-set $base0B #17ad9830
-set $base0C #149bda30
-set $base0D #796af5ff
-set $base0E #bb60ea30
-set $base0F #c720ca30
-
-# Basic color configuration using the Base16 variables for windows and borders.
-# Property Name         Border  BG      Text    Indicator Child Border
-client.focused          $base05 $base0D $base00 $base0D $base0C
-client.focused_inactive $base01 $base01 $base05 $base03 $base01
-client.unfocused        $base01 $base00 $base05 $base01 $base01
-client.urgent           $base08 $base08 $base00 $base08 $base08
+exec chromium
+exec todoist

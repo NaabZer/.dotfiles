@@ -9,13 +9,13 @@
 - link:
     ~/.config/i3: gui/i3
     ~/.config/polybar: gui/polybar
-    ~/.config/termite: terminal/termite
-    ~/.config/compton.conf: gui/compton/config
+    ~/.config/picom.conf: gui/picom/picom.conf
     ~/.config/rofi: gui/rofi
     ~/.Xresources: gui/xresources/Xresources
     ~/.config/zathura: gui/zathura
     ~/.config/alacritty: terminal/alacritty
     ~/.config/base16-shell: terminal/base16-shell
+    
 - shell:
     - xrdb -load ~/.Xresources
     - killall -USR1 i3-sensible-terminal

@@ -1,35 +1,35 @@
-# Base16 Unikitty Dark
-# Author: Josh W Lewis (@joshwlewis)
+# Base16 Apathy
+# Author: Jannik Siebert (https://github.com/janniks)
 
-set default-bg                  "#2e2a31"
-set default-fg                  "#4a464d"
+set default-bg                  "#031A16"
+set default-fg                  "#0B342D"
 
-set statusbar-fg                "#9f9da2"
-set statusbar-bg                "#666369"
+set statusbar-fg                "#5F9C92"
+set statusbar-bg                "#184E45"
 
-set inputbar-bg                 "#2e2a31"
-set inputbar-fg                 "#f5f4f7"
+set inputbar-bg                 "#031A16"
+set inputbar-fg                 "#D2E7E4"
 
-set notification-bg             "#2e2a31"
-set notification-fg             "#f5f4f7"
+set notification-bg             "#031A16"
+set notification-fg             "#D2E7E4"
 
-set notification-error-bg       "#2e2a31"
-set notification-error-fg       "#d8137f"
+set notification-error-bg       "#031A16"
+set notification-error-fg       "#3E9688"
 
-set notification-warning-bg     "#2e2a31"
-set notification-warning-fg     "#d8137f"
+set notification-warning-bg     "#031A16"
+set notification-warning-fg     "#3E9688"
 
-set highlight-color             "#dc8a0e"
-set highlight-active-color      "#796af5"
+set highlight-color             "#3E4C96"
+set highlight-active-color      "#96883E"
 
-set completion-bg               "#4a464d"
-set completion-fg               "#796af5"
+set completion-bg               "#0B342D"
+set completion-fg               "#96883E"
 
-set completion-highlight-fg     "#f5f4f7"
-set completion-highlight-bg     "#796af5"
+set completion-highlight-fg     "#D2E7E4"
+set completion-highlight-bg     "#96883E"
 
-set recolor-lightcolor          "#2e2a31"
-set recolor-darkcolor           "#d8d7da"
+set recolor-lightcolor          "#031A16"
+set recolor-darkcolor           "#A7CEC8"
 
 set recolor                     "false"
 set recolor-keephue             "false"
