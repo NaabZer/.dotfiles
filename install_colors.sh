@@ -3,23 +3,10 @@
 . base16colorscheme.conf
 
 # Download alacritty colors
-alacrittyurl="https://raw.githubusercontent.com/aarowill/base16-alacritty/master/colors/base16-${colorscheme}.yml"
+alacrittyurl="https://raw.githubusercontent.com/aarowill/base16-alacritty/master/colors/base16-${colorscheme}.toml"
 echo "downloading colorscheme for alacritty"
 $(curl $alacrittyurl > terminal/alacritty/colors)
-$(cat terminal/alacritty/base terminal/alacritty/colors > terminal/alacritty/alacritty.yml)
-
-# Download termite colors
-termiteurl="https://raw.githubusercontent.com/khamer/base16-termite/master/themes/base16-${colorscheme}.config"
-echo "downloading colorscheme for termite"
-$(curl $termiteurl > terminal/termite/colors)
-#Add opacity to colorscheme
-hex=$(perl -lne "while(/(?<=background\s{10}=\s#)\w+/g){print $&;}" "terminal/termite/colors")
-rgba=$(printf "rgba(%d, %d, %d, 0.8)\n" 0x${hex:0:2} 0x${hex:2:2} 0x${hex:4:2})
-perl -p -i -e "s/(?<=background\s{10}=\s)#\w+/$rgba/g" "terminal/termite/colors"
-# sed -i -r "s/(?<=(background\s*=\s*))#(.{2})(.{2})(.{2})/rgba(
-
-$(cat terminal/termite/base terminal/termite/colors > terminal/termite/config)
-
+$(cat terminal/alacritty/base terminal/alacritty/colors > terminal/alacritty/alacritty.toml)
 
 # Download rofi colors
 rofiurl="https://gitlab.com/jordiorlando/base16-rofi/-/raw/master/themes/base16-${colorscheme}.rasi"

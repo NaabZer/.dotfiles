@@ -18,5 +18,5 @@
     
 - shell:
     - xrdb -load ~/.Xresources
-    - killall -USR1 i3-sensible-terminal
+    #- killall -USR1 i3-sensible-terminal
     - gui/polybar/launch.sh

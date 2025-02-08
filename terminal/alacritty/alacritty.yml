@@ -869,39 +869,40 @@ window:
 
   # Print all received window events.
   #print_events: false
-# Base16 Unikitty Dark - alacritty color config
-# Josh W Lewis (@joshwlewis)
-colors:
-  # Default colors
-  primary:
-    background: '0x2e2a31'
-    foreground: '0xbcbabe'
+# Base16 Apathy - alacritty color config
+# Jannik Siebert (https://github.com/janniks)
 
-  # Colors the cursor will use if `custom_cursor_colors` is true
-  cursor:
-    text: '0x2e2a31'
-    cursor: '0xbcbabe'
+[colors]
+draw_bold_text_with_bright_colors = false
 
-  # Normal colors
-  normal:
-    black:   '0x2e2a31'
-    red:     '0xd8137f'
-    green:   '0x17ad98'
-    yellow:  '0xdc8a0e'
-    blue:    '0x796af5'
-    magenta: '0xbb60ea'
-    cyan:    '0x149bda'
-    white:   '0xbcbabe'
+# Default colors
+[colors.primary]
+background = '0x031a16'
+foreground = '0x81b5ac'
 
-  # Bright colors
-  bright:
-    black:   '0x838085'
-    red:     '0xd65407'
-    green:   '0x4a464d'
-    yellow:  '0x666369'
-    blue:    '0x9f9da2'
-    magenta: '0xd8d7da'
-    cyan:    '0xc720ca'
-    white:   '0xf5f4f7'
+# Colors the cursor will use if `custom_cursor_colors` is true
+[colors.cursor]
+text = '0x031a16'
+cursor = '0x81b5ac'
 
-draw_bold_text_with_bright_colors: false
+# Normal colors
+[colors.normal]
+black = '0x031a16'
+red = '0x3e9688'
+green = '0x883e96'
+yellow = '0x3e4c96'
+blue = '0x96883e'
+magenta = '0x4c963e'
+cyan = '0x963e4c'
+white = '0x81b5ac'
+
+# Bright colors
+[colors.bright]
+black = '0x2b685e'
+red = '0x3e7996'
+green = '0x0b342d'
+yellow = '0x184e45'
+blue = '0x5f9c92'
+magenta = '0xa7cec8'
+cyan = '0x3e965b'
+white = '0xd2e7e4'

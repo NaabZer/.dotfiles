@@ -1,3 +1,16 @@
+[window]
+
+opacity = 0.9
+
+padding.x = 10
+padding.y = 10
+
+decorations = "Full"
+decorations_theme_variant = "Light" # "Dark"
+
+[font]
+
+size = 10.0
 # Base16 Apathy - alacritty color config
 # Jannik Siebert (https://github.com/janniks)
 
