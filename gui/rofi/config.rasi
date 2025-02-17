@@ -1,7 +1,12 @@
 configuration{
-    location:   1;
-    width:      100;
-    font:       "Inconsolata-g 13";
-    padding:    0;
+    location:           1;
+    width:              140;
+    font:               "Inconsolata-g 13";
+    padding:            0;
+    terminal:           "alacritty";
+    kb-mode-complete:   "";
+    kb-remove-char-back:"BackSpace,Shift+BackSpace";
+    kb-mode-next:       "Shift+Right,Control+Tab,Control+l";
+    kb-mode-previous:   "Shift+Left,Control+Control+ISO_Left_Tab,Control+h";
 }
-@theme "color"
+@theme "theme"

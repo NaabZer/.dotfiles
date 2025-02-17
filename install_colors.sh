@@ -9,14 +9,14 @@ $(curl $alacrittyurl > terminal/alacritty/colors)
 $(cat terminal/alacritty/base terminal/alacritty/colors > terminal/alacritty/alacritty.toml)
 
 # Download rofi colors
-rofiurl="https://gitlab.com/jordiorlando/base16-rofi/-/raw/master/themes/base16-${colorscheme}.rasi"
+rofiurl="https://raw.githubusercontent.com/tinted-theming/base16-rofi/refs/heads/main/colors/base16-${colorscheme}.rasi"
 echo "downloading colorscheme for rofi"
 $(curl $rofiurl > gui/rofi/color.rasi)
 
 #Add opacity to colorscheme
-perl -p -i -e "s/(?<=lightbg:\s{1,30}rgba \( \d{1,3}, \d{1,3}, \d{1,3}, )100 %/0 %/g" "gui/rofi/color.rasi"
-perl -p -i -e "s/(?<=background:\s{1,20}rgba \( \d{1,3}, \d{1,3}, \d{1,3}, )100 %/0 %/g" "gui/rofi/color.rasi"
-perl -p -i -e "s/(?<=selected\-normal\-foreground:\s{2})\@lightbg/\@black/g" "gui/rofi/color.rasi"
+perl -p -i -e "s/(?<=lightbg:\s{1,30}rgba \( \d{1,3}, \d{1,3}, \d{1,3}, )100 %/50 %/g" "gui/rofi/color.rasi"
+perl -p -i -e "s/(?<=background:\s{1,20}rgba \( \d{1,3}, \d{1,3}, \d{1,3}, )100 %/50 %/g" "gui/rofi/color.rasi"
+#perl -p -i -e "s/(?<=selected\-normal\-foreground:\s{2})\@lightbg/\@black/g" "gui/rofi/color.rasi"
     
 # Download xrdb colors
 #xrdburl="https://raw.githubusercontent.com/janoamaral/Xresources-themes/master/base16-${colorscheme}.Xresources"
