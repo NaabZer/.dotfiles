@@ -1,0 +1,26 @@
+#header {
+    background-color: var(--colorBgAlphaBlur) !important
+}
+
+#tabs-container .button-toolbar {
+    backdrop-filter: none !important;
+    color: var(--colorHighlightBgFaded) !important;
+}
+
+.startpage-content {
+    backdrop-filter: var(--backgroundBlur) !important;
+}
+
+#footer {
+    background: var(--colorBgAlphaBlur) !important;
+    backdrop-filter: var(--backgroundBlur) !important;
+    border-top: none !important;
+}
+
+.mainbar {
+    background-color: var(--colorBgAlphaBlur) !important;
+    backdrop-filter: var(--backgroundBlur) !important;
+    border: 0 var(--colorAccentBgAlpha) solid !important;
+    border-bottom-width: 0 !important;
+    border-top-width: 1px !important;
+}
