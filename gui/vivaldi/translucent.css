@@ -19,8 +19,11 @@
 
 .mainbar {
     background-color: var(--colorBgAlphaBlur) !important;
-    backdrop-filter: var(--backgroundBlur) !important;
     border: 0 var(--colorAccentBgAlpha) solid !important;
     border-bottom-width: 0 !important;
     border-top-width: 1px !important;
+}
+
+.mainbar::after{
+    backdrop-filter: var(--backgroundBlur) !important;
 }
