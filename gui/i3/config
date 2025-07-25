@@ -193,6 +193,8 @@ bindsym XF86AudioMicMute exec "amixer sset Capture toggle"
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
 bindsym XF86Bluetooth exec "$HOME/.config/i3/bluetooth_toggle.sh"
+bindsym XF86Display exec "xrandr --output eDP-1 --mode 1920x1080 --primary && xrandr --output DP-1-1 --off && xrandr --output DP-1-2 --off && xrandr --output DP-2-1 --off  && xrandr --output DP-2-2 --off && xrandr --output DP-1 --off"
+
 
 # Bindings for audio buttons on BT headset
 bindsym XF86AudioPlay exec "playerctl play-pause"
@@ -203,7 +205,7 @@ bindsym XF86AudioPrev exec "playerctl -a previous"
 #for_window [class="^.*"] border pixel 2
 gaps inner 8
 gaps outer 0
-smart_gaps on
+smart_gaps off
 
 default_border none
 default_floating_border none
@@ -244,6 +246,8 @@ exec_always --no-startup-id feh --bg-fill $HOME/Downloads/Golden_Pav_Green.jpg
 #exec_always picom --config $HOME/.config/picom.conf -b --blur-method kawase
 exec_always picom --blur-method dual_kawase
 
+exec redshift -c $HOME/.dotfiles/gui/redshift/redshift.conf
+
 # I've never not used chromium, might as well have it to get desktop notifications
-exec chromium
+exec vivaldi
 exec todoist

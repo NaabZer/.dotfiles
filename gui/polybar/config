@@ -292,7 +292,7 @@ label-separator = |
 label-separator-foreground = ${colors.base05}
 
 menu-0-0 = Logout 
-menu-0-0-exec = exit
+menu-0-0-exec = i3-msg exit
 menu-0-1 = Reboot
 menu-0-1-exec = systemctl reboot
 menu-0-2 = Shutdown
