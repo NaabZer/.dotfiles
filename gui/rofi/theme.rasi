@@ -20,7 +20,7 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-@import                          ".dotfiles/gui/rofi/color.rasi"
+@import                          "~/.config/rofi/color.rasi"
 
 * {
     handle-colour:               var(foreground);

@@ -214,7 +214,7 @@ default_floating_border none
 focus_follows_mouse no
 
 # Lock screen
-bindsym $mod+o exec $HOME/scripts/dim_screen_lock.sh
+bindsym $mod+o exec "i3lock -B 10 -k -e --pass-media --pass-power --pass-screen"
 
 # Assign specific programs to workspaces
 for_window [class="Chromium"] move to workspace number $ws2
@@ -231,10 +231,12 @@ for_window [class="Steam" Title="Friends List"] resize set width 400px
 for_window [class="Steam" Title="Steam"] floating disable
 
 # --- STARTUP THINGS ---
+exec_always --no-startup-id xrdb -merge $HOME/.Xresources
 # Start polybar
 exec_always --no-startup-id $HOME/.dotfiles/gui/polybar/launch.sh
 
 exec_always --no-startup-id fcitx5
+
 
 # Get wallpaper
 exec_always --no-startup-id feh --bg-fill $HOME/Downloads/Golden_Pav_Green.jpg
@@ -246,8 +248,22 @@ exec_always --no-startup-id feh --bg-fill $HOME/Downloads/Golden_Pav_Green.jpg
 #exec_always picom --config $HOME/.config/picom.conf -b --blur-method kawase
 exec_always picom --blur-method dual_kawase
 
+## -- Screensaver etc -- ##
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -B 10 -k -e --pass-media --pass-power --pass-screen
+
+# Base screensaver timing (xss-lock reacts to this); no power-off handled by the script
+exec --no-startup-id xset s on
+exec --no-startup-id xset s 300 300
+
+# Flip DPMS depending on AC/battery
+exec --no-startup-id ~/scripts/power-dpms.sh
+
+## -- Screensaver End -- ##
+
+exec --no-startup-id xsettingsd
 exec redshift -c $HOME/.dotfiles/gui/redshift/redshift.conf
 
 # I've never not used chromium, might as well have it to get desktop notifications
 exec vivaldi
 exec todoist
+exec slack

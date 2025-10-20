@@ -15,4 +15,9 @@ bold.family = "Inconsolata"
 italic.family = "Inconsolata"
 bold_italic.family = "Inconsolata"
 
-size = 10.0
+size = 6.0
+
+[env]
+WINIT_HIDPI_FACTOR = "1"
+WINIT_X11_SCALE_FACTOR = "2.3"
+
