@@ -214,7 +214,7 @@ default_floating_border none
 focus_follows_mouse no
 
 # Lock screen
-bindsym $mod+o exec "i3lock -B 10 -k -e --pass-media --pass-power --pass-screen"
+bindsym $mod+o exec "$HOME/.dotfiles/gui/i3/lock.sh"
 
 # Assign specific programs to workspaces
 for_window [class="Chromium"] move to workspace number $ws2
@@ -249,11 +249,11 @@ exec_always --no-startup-id feh --bg-fill $HOME/Downloads/Golden_Pav_Green.jpg
 exec_always picom --blur-method dual_kawase
 
 ## -- Screensaver etc -- ##
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -B 10 -k -e --pass-media --pass-power --pass-screen
+exec --no-startup-id xss-lock --transfer-sleep-lock -- $HOME/.dotfiles/gui/i3/lock.sh
 
 # Base screensaver timing (xss-lock reacts to this); no power-off handled by the script
 exec --no-startup-id xset s on
-exec --no-startup-id xset s 300 300
+exec --no-startup-id xset s 300 0
 
 # Flip DPMS depending on AC/battery
 exec --no-startup-id ~/scripts/power-dpms.sh
