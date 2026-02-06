@@ -261,7 +261,8 @@ exec --no-startup-id ~/scripts/power-dpms.sh
 ## -- Screensaver End -- ##
 
 exec --no-startup-id xsettingsd
-exec redshift -c $HOME/.dotfiles/gui/redshift/redshift.conf
+# exec redshift -c $HOME/.dotfiles/gui/redshift/redshift.conf
+exec redshift
 
 # I've never not used chromium, might as well have it to get desktop notifications
 exec vivaldi
