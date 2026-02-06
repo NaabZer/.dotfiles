@@ -261,6 +261,7 @@ exec --no-startup-id ~/scripts/power-dpms.sh
 ## -- Screensaver End -- ##
 
 exec --no-startup-id xsettingsd
+exec --no-startup-id flameshot
 # exec redshift -c $HOME/.dotfiles/gui/redshift/redshift.conf
 exec redshift
 
