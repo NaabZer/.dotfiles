@@ -9,12 +9,11 @@ STATE_DIR="$HOME/.claude/notification-state"
 
 if [ -z "$1" ]; then
     # First call - list Claude Code terminals with pango markup
-    echo -en "\x00markup-rows\x1ftrue\n"
 
     # Get windows from i3 with workspace info and focus state
     # Output format: workspace_num|con_id|x11_window_id|focused|window_title
     # Sorted by workspace number
-    i3-msg -t get_tree | jq -r '
+    windows=$(i3-msg -t get_tree | jq -r '
         # Recursive function to find windows with their workspace
         def find_windows($ws_num):
             if .window_properties?.class == "Alacritty" or .app_id == "Alacritty" then
@@ -31,7 +30,17 @@ if [ -z "$1" ]; then
         .. | objects | select(.type == "workspace" and .num != null) |
         .num as $ws_num |
         (.nodes[]?, .floating_nodes[]?) | find_windows($ws_num)
-    ' | sort -t'|' -k1 -n | while IFS='|' read -r ws_num con_id x11_id focused window_title; do
+    ' | sort -t'|' -k1 -n)
+
+    # Build entries and track focused index
+    entries=()
+    con_ids=()
+    focused_index=-1
+    index=0
+
+    while IFS='|' read -r ws_num con_id x11_id focused window_title; do
+        [ -z "$ws_num" ] && continue
+
         # Build the display title with workspace prefix
         prefix="[${ws_num}]"
 
@@ -62,6 +71,7 @@ if [ -z "$1" ]; then
 
         # Build display with focus marker and notification indicator
         if [[ "$focused" == "true" ]]; then
+            focused_index=$index
             if [[ "$has_notification" == "true" ]]; then
                 display="<b>» ${prefix} 🔔 ${colored_title}</b>"
             else
@@ -75,8 +85,21 @@ if [ -z "$1" ]; then
             fi
         fi
 
-        # Output the colored title with container ID as metadata
-        echo -en "${display}\x00info\x1f${con_id}\n"
+        entries+=("$display")
+        con_ids+=("$con_id")
+        ((index++))
+    done <<< "$windows"
+
+    # Output header with markup and active row (if focused window found)
+    if [ $focused_index -ge 0 ]; then
+        echo -en "\x00markup-rows\x1ftrue\n\x00active\x1f${focused_index}\n"
+    else
+        echo -en "\x00markup-rows\x1ftrue\n"
+    fi
+
+    # Output all entries
+    for i in "${!entries[@]}"; do
+        echo -en "${entries[$i]}\x00info\x1f${con_ids[$i]}\n"
     done
 else
     # Selection made - focus the window using i3-msg
