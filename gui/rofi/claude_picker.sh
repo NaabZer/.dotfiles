@@ -73,13 +73,13 @@ if [ -z "$1" ]; then
         if [[ "$focused" == "true" ]]; then
             focused_index=$index
             if [[ "$has_notification" == "true" ]]; then
-                display="<b>» ${prefix} 🔔 ${colored_title}</b>"
+                display="<b>» ${prefix} 🔔; ${colored_title}</b>"
             else
                 display="<b>» ${prefix} ${colored_title}</b>"
             fi
         else
             if [[ "$has_notification" == "true" ]]; then
-                display="  ${prefix} 🔔 ${colored_title}"
+                display="  ${prefix} 🔔; ${colored_title}"
             else
                 display="  ${prefix} ${colored_title}"
             fi
