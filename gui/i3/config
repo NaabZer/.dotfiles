@@ -250,6 +250,9 @@ exec_always --no-startup-id feh --bg-fill $HOME/Downloads/Golden_Pav_Green.jpg
 #exec_always picom --config $HOME/.config/picom.conf -b --blur-method kawase
 exec_always picom --blur-method dual_kawase
 
+# Claude notification dismiss daemon (auto-dismiss on terminal focus)
+exec_always --no-startup-id $HOME/.dotfiles/gui/i3/scripts/claude-notification-dismiss.py
+
 ## -- Screensaver etc -- ##
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $HOME/.dotfiles/gui/i3/lock.sh
 
