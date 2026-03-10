@@ -7,6 +7,10 @@ configuration{
     kb-mode-complete:   "";
     kb-remove-char-back:"BackSpace,Shift+BackSpace";
     kb-mode-next:       "Shift+Right,Control+Tab,Control+l";
-    kb-mode-previous:   "Shift+Left,Control+Control+ISO_Left_Tab,Control+h";
+    kb-mode-previous:   "Shift+Left,Control+ISO_Left_Tab,Control+h";
+    kb-accept-entry:    "Control+m,Return,KP_Enter";
+    kb-row-down:        "Down,Control+j";
+    kb-remove-to-eol:   "";
+    kb-row-up:          "Up,Control+k";
 }
 @theme "theme"

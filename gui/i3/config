@@ -38,6 +38,8 @@ bindsym $mod+Shift+q kill
 
 # start rofi (a program launcher)
 bindsym $mod+d exec "~/.config/rofi/run_rofi.sh"
+# rofi for claude instances
+bindsym $mod+c exec "rofi -show claude -modi 'claude:~/.config/rofi/claude_picker.sh' -dpi 82"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
