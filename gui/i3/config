@@ -226,6 +226,8 @@ for_window [class="Slack"] move to workspace number $ws8
 for_window [class="Steam"] move to workspace number $ws9
 for_window [class="Todoist"] move to workspace number $ws8
 for_window [class="Termite" title="UNITY$"] move to workspace number $ws3 #Unity vim
+for_window [class="slack-review-poller"] move container to workspace 6
+no_focus [class="slack-review-poller"]
 
 # Space steam
 for_window [class="Steam" Title=".*News.*"] floating enable
@@ -265,6 +267,12 @@ exec --no-startup-id xset s 300 0
 exec --no-startup-id ~/scripts/power-dpms.sh
 
 ## -- Screensaver End -- ##
+
+## Slack review executor
+# Import session env vars into the user manager, then restart the daemon so
+# it picks them up via PassEnvironment (otherwise it captured an empty env
+# at boot, before i3 ran this line, and alacritty spawns silently fail).
+exec --no-startup-id systemctl --user import-environment DISPLAY I3SOCK XAUTHORITY && systemctl --user try-restart slack-review-poller
 
 exec --no-startup-id xsettingsd
 exec --no-startup-id flameshot
