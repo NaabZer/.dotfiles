@@ -32,10 +32,9 @@ if [ -z "$1" ]; then
         (.nodes[]?, .floating_nodes[]?) | find_windows($ws_num)
     ' | sort -t'|' -k1 -n)
 
-    # Build entries and track focused index
+    # Build entries
     entries=()
     con_ids=()
-    focused_index=-1
     index=0
 
     while IFS='|' read -r ws_num con_id x11_id focused window_title; do
@@ -69,9 +68,19 @@ if [ -z "$1" ]; then
             colored_title="$window_title"
         fi
 
+        # Check if this is the pre-captured focused window (from wrapper env var)
+        # or fall back to i3 focus state if wrapper wasn't used
+        is_focused=false
+        if [[ -n "$CLAUDE_PICKER_FOCUSED_ID" ]]; then
+            # Wrapper passed the focused ID - use that
+            [[ "$con_id" == "$CLAUDE_PICKER_FOCUSED_ID" ]] && is_focused=true
+        else
+            # No wrapper - use i3 focus state (may be stale if rofi stole focus)
+            [[ "$focused" == "true" ]] && is_focused=true
+        fi
+
         # Build display with focus marker and notification indicator
-        if [[ "$focused" == "true" ]]; then
-            focused_index=$index
+        if [[ "$is_focused" == "true" ]]; then
             if [[ "$has_notification" == "true" ]]; then
                 display="<b>» ${prefix} 🔔; ${colored_title}</b>"
             else
@@ -90,9 +99,10 @@ if [ -z "$1" ]; then
         ((index++))
     done <<< "$windows"
 
-    # Output header with markup and active row (if focused window found)
-    if [ $focused_index -ge 0 ]; then
-        echo -en "\x00markup-rows\x1ftrue\n\x00active\x1f${focused_index}\n"
+    # Output header with markup and active row styling
+    # Use index from wrapper env var to ensure it matches -selected-row
+    if [[ -n "$CLAUDE_PICKER_FOCUSED_INDEX" && "$CLAUDE_PICKER_FOCUSED_INDEX" != "-1" ]]; then
+        echo -en "\x00markup-rows\x1ftrue\n\x00active\x1f${CLAUDE_PICKER_FOCUSED_INDEX}\n"
     else
         echo -en "\x00markup-rows\x1ftrue\n"
     fi
