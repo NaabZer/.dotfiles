@@ -103,8 +103,36 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+m focus mode_toggle
 
-# focus the parent container
-bindsym $mod+a focus parent
+# focus the parent container: turn borders on for EVERY window on this
+# workspace so i3 highlights the selected container (client.focused, gold)
+# against the rest (dim). i3 can't border just one split container, so we
+# border the whole workspace for the duration of "select" mode; exiting
+# strips them again (default_border is none).
+bindsym $mod+a focus parent, mode "select", exec --no-startup-id i3-msg '[workspace=__focused__] border pixel 2'
+
+mode "select" {
+        # climb higher up the tree (borders already on)
+        bindsym $mod+a focus parent
+
+        # move the selected container around
+        bindsym $mod+h move left
+        bindsym $mod+j move down
+        bindsym $mod+k move up
+        bindsym $mod+l move right
+        bindsym $mod+Left  move left
+        bindsym $mod+Down  move down
+        bindsym $mod+Up    move up
+        bindsym $mod+Right move right
+
+        # change its layout, staying in select mode so you can see the result
+        bindsym $mod+e layout toggle split
+        bindsym $mod+s layout stacking
+        bindsym $mod+w layout tabbed
+
+        # commit / cancel: strip borders and drop back down to a window
+        bindsym Return focus child, mode "default", exec --no-startup-id i3-msg '[workspace=__focused__] border none'
+        bindsym Escape focus child, mode "default", exec --no-startup-id i3-msg '[workspace=__focused__] border none'
+}
 
 # change focus between tiling / floating windows
 bindsym $mod+space exec "bash $HOME/.dotfiles/gui/i3/todoist_add.sh"
@@ -212,6 +240,15 @@ smart_gaps off
 
 default_border none
 default_floating_border none
+
+# Only visible during "select" mode (border pixel). The selected container's
+# windows render as client.focused (gold); every other window on the workspace
+# renders dim so the selection stands out. background/text keep sensible values
+# so tabbed/stacked title bars still look fine.
+#                        border   background text     indicator child_border
+client.focused          #e0af68  #285577    #ffffff  #e0af68   #e0af68
+client.focused_inactive #333333  #222222    #888888  #333333   #333333
+client.unfocused        #222222  #222222    #888888  #222222   #222222
 
 # Turn off mouse focusing
 focus_follows_mouse no
