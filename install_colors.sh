@@ -17,7 +17,15 @@ $(curl $rofiurl > gui/rofi/color.rasi)
 perl -p -i -e "s/(?<=lightbg:\s{1,30}rgba \( \d{1,3}, \d{1,3}, \d{1,3}, )100 %/50 %/g" "gui/rofi/color.rasi"
 perl -p -i -e "s/(?<=background:\s{1,20}rgba \( \d{1,3}, \d{1,3}, \d{1,3}, )100 %/50 %/g" "gui/rofi/color.rasi"
 #perl -p -i -e "s/(?<=selected\-normal\-foreground:\s{2})\@lightbg/\@black/g" "gui/rofi/color.rasi"
-    
+
+# Download i3 colors
+# base16 `set $baseXX` vars go first, then the hand-edited config_base, since
+# i3 substitutes variables in a single top-down pass (must be defined before use).
+i3url="https://raw.githubusercontent.com/tinted-theming/base16-i3/main/colors/base16-${colorscheme}.config"
+echo "downloading colorscheme for i3"
+$(curl $i3url > gui/i3/colors)
+$(cat gui/i3/colors gui/i3/config_base > gui/i3/config)
+
 # Download xrdb colors
 #xrdburl="https://raw.githubusercontent.com/janoamaral/Xresources-themes/master/base16-${colorscheme}.Xresources"
 xrdburl="https://raw.githubusercontent.com/tinted-theming/tinted-xresources/refs/heads/main/xresources/base16-${colorscheme}.Xresources"
