@@ -44,6 +44,18 @@ $(cat gui/xresources/Xresources_base gui/xresources/Xresources_col > gui/xresour
 zathuraurl="https://raw.githubusercontent.com/HaoZeke/base16-zathura/main/build_schemes/colors/base16-${colorscheme}.config"
 $(curl $zathuraurl > gui/zathura/zathurarc)
 
+# Download dunst colors
+dunsturl="https://raw.githubusercontent.com/tinted-theming/base16-dunst/main/themes/base16-${colorscheme}.dunstrc"
+echo "downloading colorscheme for dunst"
+$(curl $dunsturl > gui/dunst/colors)
+
+# Add alpha to backgrounds (same #cc alpha as the Xresources trans colors above)
+perl -p -i -e 's/^(\s*background\s*=\s*"#[0-9a-fA-F]{6})"/$1cc"/g' "gui/dunst/colors"
+
+$(cat gui/dunst/colors gui/dunst/dunstrc_base > gui/dunst/dunstrc)
+# dunst is dbus-activated: `killall dunst` is needed to pick up changes, it
+# respawns on the next notification. Not run here.
+
 # apply base16-shell
 script=~/.config/base16-shell/scripts/base16-${colorscheme}.sh
 [ -f $script ] && . $script
