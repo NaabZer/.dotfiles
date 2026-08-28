@@ -7,6 +7,12 @@
 # repeated sections, with later keys overriding earlier ones.
 
 [global]
+# Border thickness around notification windows
+frame_width = 1
+
+# Match polybar's font (Inconsolata-g not installed here, falls back to Monospace)
+font = Monospace 11
+
 # Show notifications on monitor with keyboard focus (active window)
 follow = keyboard
 

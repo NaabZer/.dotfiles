@@ -44,13 +44,41 @@ $(cat gui/xresources/Xresources_base gui/xresources/Xresources_col > gui/xresour
 zathuraurl="https://raw.githubusercontent.com/HaoZeke/base16-zathura/main/build_schemes/colors/base16-${colorscheme}.config"
 $(curl $zathuraurl > gui/zathura/zathurarc)
 
+# set_dunst_color <urgency> <background|foreground> <#rrggbb>
+# Rewrites one color in the [base16_<urgency>] section of gui/dunst/colors.
+set_dunst_color() {
+    local urgency="$1" field="$2" color="$3"
+    if [ "$field" = "background" ]; then
+        perl -0777 -p -i -e "s/(msg_urgency = \"$urgency\"\n\s*background = \")#[0-9a-fA-F]{6}(\")/\${1}$color\$2/" "gui/dunst/colors"
+    else
+        perl -0777 -p -i -e "s/(msg_urgency = \"$urgency\"\n\s*background = \"[^\"]*\"\n\s*foreground = \")#[0-9a-fA-F]{6}(\")/\${1}$color\$2/" "gui/dunst/colors"
+    fi
+}
+
 # Download dunst colors
 dunsturl="https://raw.githubusercontent.com/tinted-theming/base16-dunst/main/themes/base16-${colorscheme}.dunstrc"
 echo "downloading colorscheme for dunst"
 $(curl $dunsturl > gui/dunst/colors)
 
-# Add alpha to backgrounds (same #cc alpha as the Xresources trans colors above)
-perl -p -i -e 's/^(\s*background\s*=\s*"#[0-9a-fA-F]{6})"/$1cc"/g' "gui/dunst/colors"
+# base16 slot used for critical notifications; base08 is the semantic "red"
+# slot but apathy puts teal there and purple in base0B, so use base0B instead
+dunst_critical_bg=base0B
+
+base06=$(cat gui/xresources/Xresources_col | grep "#define base06" | cut -d' ' -f3)
+base07=$(cat gui/xresources/Xresources_col | grep "#define base07" | cut -d' ' -f3)
+dunst_critical_bg_color=$(cat gui/xresources/Xresources_col | grep "#define $dunst_critical_bg" | cut -d' ' -f3)
+
+# Swap the critical background for the slot picked above
+set_dunst_color critical background "$dunst_critical_bg_color"
+
+# Add alpha to backgrounds (60% opaque, same style as the Xresources trans colors above)
+perl -p -i -e 's/^(\s*background\s*=\s*"#[0-9a-fA-F]{6})"/${1}99"/g' "gui/dunst/colors"
+
+# Rewrite foregrounds: low uses base06, normal/critical use base07 (brighter,
+# for better contrast against the darker/critical backgrounds)
+set_dunst_color low foreground "$base06"
+set_dunst_color normal foreground "$base07"
+set_dunst_color critical foreground "$base07"
 
 $(cat gui/dunst/colors gui/dunst/dunstrc_base > gui/dunst/dunstrc)
 # dunst is dbus-activated: `killall dunst` is needed to pick up changes, it

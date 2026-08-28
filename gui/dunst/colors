@@ -4,15 +4,15 @@ separator_color = "#81b5ac"
 
 [base16_low]
     msg_urgency = "low"
-    background = "#0b342dcc"
-    foreground = "#2b685e"
+    background = "#0b342d99"
+    foreground = "#a7cec8"
 
 [base16_normal]
     msg_urgency = "normal"
-    background = "#184e45cc"
-    foreground = "#81b5ac"
+    background = "#184e4599"
+    foreground = "#d2e7e4"
 
 [base16_critical]
     msg_urgency = "critical"
-    background = "#3e9688cc"
-    foreground = "#a7cec8"
+    background = "#883e9699"
+    foreground = "#d2e7e4"
