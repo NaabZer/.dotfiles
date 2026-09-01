@@ -1,0 +1,22 @@
+/**
+ * Claude Code Picker Theme
+ *
+ * Inherits the main rofi theme (colors, fonts, layout). Window width is
+ * overridden because the picker needs a wider window than the base
+ * theme's fixed 1000px (~854 real px at dpi 82), which truncated rows. Listview lines is pinned here rather than inherited, so the
+ * picker's -eh 3 layout keeps a known row count even if theme.rasi's
+ * lines value changes later. Percentages are of screen width, not
+ * dpi-scaled, so this looks consistent across the ultrawide and the
+ * 1440p monitor.
+ */
+@theme "~/.config/rofi/theme.rasi"
+
+window {
+    /* Width as a percentage of screen width (not dpi-scaled). */
+    width: 45%;
+}
+
+listview {
+    /* Pinned independent of theme.rasi so -eh 3 keeps a known row count. */
+    lines: 8;
+}

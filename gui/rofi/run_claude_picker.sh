@@ -7,7 +7,9 @@ PICKER_SCRIPT="$SCRIPT_DIR/claude_picker.sh"
 # claude_picker.sh to archive the selected (non-open) session in place.
 # -eh 3 matches listing.py's 3-pango-line row layout (title, project/branch,
 # note); window width and listview lines are the knobs to tweak if rows
-# still feel cramped or the list runs too tall/short for the screen.
+# still feel cramped or the list runs too tall/short for the screen — set
+# them in claude_picker.rasi (a dedicated theme that overrides the shared
+# theme.rasi), since -theme-str can't win a specificity fight against it.
 rofi -show claude -modi "claude:$PICKER_SCRIPT" -matching fuzzy -selected-row 0 -dpi 82 \
     -kb-custom-1 "Control+a" -kb-move-front "" -eh 3 \
-    -theme-str 'window {width: 56%;}' -theme-str 'listview {lines: 8;}'
+    -theme "$SCRIPT_DIR/claude_picker.rasi"
