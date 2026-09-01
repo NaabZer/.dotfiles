@@ -6,10 +6,6 @@
 #
 # -matching fuzzy is set on the rofi command side (see run_claude_picker.sh /
 # the i3 $mod+c keybind), not here.
-#
-# CLAUDE_PICKER_FOCUSED_ID / CLAUDE_PICKER_FOCUSED_INDEX may still be
-# exported by run_claude_picker.sh; they are harmless no-ops here now that
-# `ccs list --rofi` owns row ordering, so nothing reads them any more.
 
 CCS="$HOME/.claude/session-manager/.venv/bin/ccs"
 
