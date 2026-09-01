@@ -20,3 +20,12 @@ listview {
     /* Pinned independent of theme.rasi so -eh 3 keeps a known row count. */
     lines: 8;
 }
+
+element-text {
+    /* Pixel position of the age column (theme px, dpi-scaled). Line 1 of
+     * each row is "<title>\t<age>"; rofi aligns the tab to this stop
+     * instead of us space-padding to a character column, which doesn't
+     * line up reliably since rofi's text rendering isn't uniformly
+     * monospace. Tune together with window width above. */
+    tab-stops: [ 1050px ];
+}
