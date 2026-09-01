@@ -10,6 +10,27 @@
 CCS="$HOME/.claude/session-manager/.venv/bin/ccs"
 
 if [ -z "$1" ]; then
+    # Initial call: rofi has not yet made a selection (ROFI_RETV=0).
+    exec "$CCS" list --rofi
+fi
+
+# rofi mode-script contract: ROFI_RETV=10 means the custom keybinding
+# (Control+a, see run_claude_picker.sh's -kb-custom-1) fired on the
+# currently selected row; ROFI_RETV=1 is a normal Enter selection.
+if [ "$ROFI_RETV" = "10" ]; then
+    if [ "$ROFI_INFO" = "manage" ] || [ -z "$ROFI_INFO" ]; then
+        exec "$CCS" list --rofi
+    fi
+
+    IFS='|' read -r sid con_id <<< "$ROFI_INFO"
+
+    if [ -n "$con_id" ] && [ "$con_id" != "-" ]; then
+        dunstify "ccs" "won't archive an open session"
+    else
+        out=$("$CCS" state "$sid" archived 2>&1) || dunstify "ccs archive" "$out"
+    fi
+
+    # Re-exec so rofi refreshes the listing in place after the archive.
     exec "$CCS" list --rofi
 fi
 
