@@ -10,6 +10,12 @@ PICKER_SCRIPT="$SCRIPT_DIR/claude_picker.sh"
 # still feel cramped or the list runs too tall/short for the screen — set
 # them in claude_picker.rasi (a dedicated theme that overrides the shared
 # theme.rasi), since -theme-str can't win a specificity fight against it.
-rofi -show claude -modi "claude:$PICKER_SCRIPT" -matching fuzzy -selected-row 0 -dpi 82 \
+# -sort -sorting-method fzf is needed because plain -matching fuzzy only
+# filters and keeps the script's emission (tier) order, so a scattered-letter
+# match like "ccs" ranked equal to an exact substring; fzf scoring re-ranks
+# typed filters by match quality while an empty filter still shows the tiers
+# untouched.
+rofi -show claude -modi "claude:$PICKER_SCRIPT" -matching fuzzy -sort -sorting-method fzf \
+    -selected-row 0 -dpi 82 \
     -kb-custom-1 "Control+a" -kb-move-front "" -eh 3 \
     -theme "$SCRIPT_DIR/claude_picker.rasi"
