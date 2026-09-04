@@ -1,5 +1,6 @@
 #!/bin/bash
-# Claude Code Picker Launcher — starts at the top row; tiers order the list.
+# Claude Code Picker Launcher — starts at the top row on the "all" tab;
+# tiers order each tab's list, and sidebar tabs filter by tier (see below).
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PICKER_SCRIPT="$SCRIPT_DIR/claude_picker.sh"
 # -kb-move-front is cleared because rofi errors on a duplicate keybinding
@@ -15,7 +16,19 @@ PICKER_SCRIPT="$SCRIPT_DIR/claude_picker.sh"
 # match like "ccs" ranked equal to an exact substring; fzf scoring re-ranks
 # typed filters by match quality while an empty filter still shows the tiers
 # untouched.
-rofi -show claude -modi "claude:$PICKER_SCRIPT" -matching fuzzy -sort -sorting-method fzf \
+#
+# One rofi mode per tier, switched via -sidebar-mode; each mode is
+# `$PICKER_SCRIPT <tier>` (claude_picker.sh's now-required first argv slot --
+# see its header comment). The mode display names double as fuzzy-filter
+# token reminders (rofi has no jump-to-tab binding, so "(~o)"/"(~r)"/"(~p)"/
+# "(~s)" echo listing.py's per-row meta token so a user can still type the
+# token instead of switching tabs); the mode-switcher element itself is
+# already styled in claude_picker.rasi, so -sidebar-mode just lights it up,
+# and Ctrl+h/l plus Shift+Left/Right already switch modes via the user's
+# kb-mode-next/kb-mode-previous config.
+rofi -show all -sidebar-mode -modi \
+    "all:$PICKER_SCRIPT all,open (~o):$PICKER_SCRIPT open,review (~r):$PICKER_SCRIPT review,parked (~p):$PICKER_SCRIPT parked,snoozed (~s):$PICKER_SCRIPT snoozed" \
+    -matching fuzzy -sort -sorting-method fzf \
     -selected-row 0 -dpi 82 \
     -kb-custom-1 "Control+a" -kb-move-front "" -eh 3 \
     -theme "$SCRIPT_DIR/claude_picker.rasi"

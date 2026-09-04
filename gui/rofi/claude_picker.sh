@@ -4,14 +4,22 @@
 # All tiering, glyphs, and meta tokens live in ccs; this script only speaks
 # the rofi mode-script protocol and dispatches on selection.
 #
+# rofi invokes a script-mode command as `<command> [selection]`, so the tier
+# is passed as a required first argv slot baked into the `-modi` spec (see
+# run_claude_picker.sh's sidebar tabs, one `$PICKER_SCRIPT <tier>` per tab);
+# the selection, if any, is $2.
+#
 # -matching fuzzy is set on the rofi command side (see run_claude_picker.sh /
 # the i3 $mod+c keybind), not here.
 
 CCS="$HOME/.claude/session-manager/.venv/bin/ccs"
 
-if [ -z "$1" ]; then
+TIER="$1"
+SELECTION="$2"
+
+if [ -z "$SELECTION" ]; then
     # Initial call: rofi has not yet made a selection (ROFI_RETV=0).
-    exec "$CCS" list --rofi
+    exec "$CCS" list --rofi --tier "$TIER"
 fi
 
 # rofi mode-script contract: ROFI_RETV=10 means the custom keybinding
@@ -19,7 +27,7 @@ fi
 # currently selected row; ROFI_RETV=1 is a normal Enter selection.
 if [ "$ROFI_RETV" = "10" ]; then
     if [ "$ROFI_INFO" = "manage" ] || [ -z "$ROFI_INFO" ]; then
-        exec "$CCS" list --rofi
+        exec "$CCS" list --rofi --tier "$TIER"
     fi
 
     IFS='|' read -r sid con_id <<< "$ROFI_INFO"
@@ -31,7 +39,7 @@ if [ "$ROFI_RETV" = "10" ]; then
     fi
 
     # Re-exec so rofi refreshes the listing in place after the archive.
-    exec "$CCS" list --rofi
+    exec "$CCS" list --rofi --tier "$TIER"
 fi
 
 if [ "$ROFI_INFO" = "manage" ]; then
