@@ -43,7 +43,7 @@ if [ "$ROFI_RETV" = "10" ]; then
 fi
 
 if [ "$ROFI_INFO" = "manage" ]; then
-    dunstify "ccs" "fzf manage mode arrives in phase 2"
+    setsid -f "$HOME/.config/rofi/run_ccs_manage.sh" >/dev/null 2>&1
     exit 0
 fi
 
