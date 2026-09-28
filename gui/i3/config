@@ -288,7 +288,8 @@ for_window [class="Slack"] move to workspace number $ws8
 for_window [class="Steam"] move to workspace number $ws9
 for_window [class="Todoist"] move to workspace number $ws8
 for_window [class="Termite" title="UNITY$"] move to workspace number $ws3 #Unity vim
-for_window [class="slack-review-poller"] move container to workspace 6
+for_window [class="slack-review-poller"] move to workspace number $ws6, layout stacking
+for_window [workspace="^6"] layout stacking
 no_focus [class="slack-review-poller"]
 for_window [class="ccs-manage"] floating enable, resize set 1600 900, move position center
 
