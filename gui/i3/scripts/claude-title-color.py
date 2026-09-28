@@ -2,8 +2,9 @@
 """
 i3 Claude Title Color Daemon
 
-Colors the status token ([running]/[waiting]) in the i3 window title of
-Claude Code Alacritty terminals using per-window Pango title_format markup.
+Colors the trailing status token ([running]/[permission]/[input]/[dialog]/
+[attention]/[idle]) in the i3 window title of Claude Code Alacritty terminals
+using per-window Pango title_format markup.
 
 Only manages Alacritty windows whose title contains "[CC]" (case-insensitive).
 On shutdown, resets every managed window's title_format back to plain "%title"
@@ -14,6 +15,7 @@ Dependencies: pip install i3ipc
 
 import atexit
 import fcntl
+import re
 import signal
 import sys
 from pathlib import Path
@@ -22,8 +24,24 @@ from i3ipc import Connection, Event
 
 LOCK_FILE = Path("/tmp/claude-title-color.lock")
 
-RUNNING_COLOR = "#5dbd70"
-WAITING_COLOR = "#e09448"
+GREEN = "#5dbd70"
+ORANGE = "#e09448"
+RED = "#f7768e"
+YELLOW = "#e0af68"
+
+# Keyed by the word inside the trailing "[...]" token (see
+# skills/title/scripts/set_state.sh LABEL_* constants), not the leading
+# glyph, so this table stays readable.
+STATUS_COLORS = {
+    "running": GREEN,
+    "idle": ORANGE,
+    "permission": RED,
+    "input": RED,
+    "dialog": RED,
+    "attention": YELLOW,
+}
+
+_TRAILING_TOKEN_RE = re.compile(r"\[([^\[\]]*)\]$")
 
 _reset_done = False
 _i3: Connection | None = None
@@ -54,13 +72,21 @@ def build_title_format(title: str) -> str:
         return "%title"
 
     stripped = title.rstrip()
-    for token, color in (("[running]", RUNNING_COLOR), ("[waiting]", WAITING_COLOR)):
-        if stripped.endswith(token):
-            escaped = pango_escape(title)
-            idx = escaped.rfind(token)
-            span = f"<span foreground='{color}'>{token}</span>"
-            return escaped[:idx] + span + escaped[idx + len(token) :]
-    return "%title"
+    match = _TRAILING_TOKEN_RE.search(stripped)
+    if match is None:
+        return "%title"
+
+    inner = match.group(1)
+    word = inner.split()[-1].lower() if inner.split() else ""
+    color = STATUS_COLORS.get(word)
+    if color is None:
+        return "%title"
+
+    token = match.group(0)
+    escaped = pango_escape(title)
+    idx = escaped.rfind(pango_escape(token))
+    span = f"<span foreground='{color}'>{pango_escape(token)}</span>"
+    return escaped[:idx] + span + escaped[idx + len(pango_escape(token)) :]
 
 
 def i3_command_quote(fmt: str) -> str:
