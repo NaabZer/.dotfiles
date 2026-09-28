@@ -269,7 +269,7 @@ for_window [class="Termite" title="UNITY$"] move to workspace number $ws3 #Unity
 for_window [class="slack-review-poller"] move to workspace number $ws6, layout stacking
 for_window [workspace="^6"] layout stacking
 no_focus [class="slack-review-poller"]
-for_window [class="ccs-manage"] floating enable, resize set 1600 900, move position center
+for_window [class="ccs-manage"] floating enable, resize set 95 ppt 95 ppt, move position center
 
 # Space steam
 for_window [class="Steam" Title=".*News.*"] floating enable
