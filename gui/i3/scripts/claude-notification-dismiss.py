@@ -5,9 +5,9 @@ i3 Focus-Aware Notification Dismiss Daemon
 Listens for i3 window focus events and automatically dismisses Claude Code
 notifications when their associated terminal window gains focus.
 
-Reads state files from ~/.claude/notification-state/:
-  - window_id.[SESSION_KEY]: X11 window ID (hex)
-  - notification_id.[SESSION_KEY]: Dunst notification ID (integer)
+Invariant: the session key is the decimal X11 window id, equal to
+ALACRITTY_WINDOW_ID; a window counts as a Claude session only if
+~/.claude/session-ids/<key> or notification-state/notification_id.<key> exists.
 
 Dependencies: pip install i3ipc
 """
@@ -20,6 +20,7 @@ from pathlib import Path
 from i3ipc import Connection, Event
 
 STATE_DIR = Path.home() / ".claude" / "notification-state"
+SESSION_IDS_DIR = Path.home() / ".claude" / "session-ids"
 LOCK_FILE = Path("/tmp/claude-notification-dismiss.lock")
 CCS = Path.home() / ".claude" / "session-manager" / ".venv" / "bin" / "ccs"
 SET_STATE = Path.home() / ".claude" / "skills" / "title" / "scripts" / "set_state.sh"
@@ -33,21 +34,6 @@ def ensure_single_instance():
     except OSError:
         sys.exit(0)  # Another instance is already running
     return lock_fp  # Keep reference to prevent GC releasing the lock
-
-
-def get_session_for_window(window_id_hex: str) -> str | None:
-    """Find session key that has this window ID stored."""
-    if not STATE_DIR.exists():
-        return None
-
-    for f in STATE_DIR.glob("window_id.*"):
-        try:
-            stored_id = f.read_text().strip()
-            if stored_id == window_id_hex:
-                return f.suffix[1:]  # Remove leading dot to get session key
-        except OSError:
-            continue
-    return None
 
 
 def close_notification(notification_id: int) -> None:
@@ -78,10 +64,9 @@ def on_window_focus(_i3, event) -> None:
     if not event.container.window:
         return
 
-    window_id_hex = hex(event.container.window)
-    session_key = get_session_for_window(window_id_hex)
-
-    if not session_key:
+    session_key = str(event.container.window)
+    notification_file = STATE_DIR / f"notification_id.{session_key}"
+    if not (SESSION_IDS_DIR / session_key).exists() and not notification_file.exists():
         return
 
     try:
@@ -90,7 +75,6 @@ def on_window_focus(_i3, event) -> None:
         # Marking seen must never take down the focus-event handler.
         pass
 
-    notification_file = STATE_DIR / f"notification_id.{session_key}"
     if notification_file.exists():
         try:
             notification_id = int(notification_file.read_text().strip())
