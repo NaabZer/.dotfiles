@@ -22,15 +22,15 @@ if [ -z "$SELECTION" ]; then
     exec "$CCS" list --rofi --tier "$TIER"
 fi
 
+IFS='|' read -r sid con_id <<< "$ROFI_INFO"
+
 # rofi mode-script contract: ROFI_RETV=10 means the custom keybinding
 # (Control+a, see run_claude_picker.sh's -kb-custom-1) fired on the
 # currently selected row; ROFI_RETV=1 is a normal Enter selection.
 if [ "$ROFI_RETV" = "10" ]; then
-    if [ "$ROFI_INFO" = "manage" ] || [ -z "$ROFI_INFO" ]; then
+    if [ "$sid" = "manage" ] || [ -z "$sid" ]; then
         exec "$CCS" list --rofi --tier "$TIER"
     fi
-
-    IFS='|' read -r sid con_id <<< "$ROFI_INFO"
 
     if [ -n "$con_id" ] && [ "$con_id" != "-" ]; then
         dunstify "ccs" "won't archive an open session"
@@ -42,12 +42,18 @@ if [ "$ROFI_RETV" = "10" ]; then
     exec "$CCS" list --rofi --tier "$TIER"
 fi
 
-if [ "$ROFI_INFO" = "manage" ]; then
-    setsid -f "$HOME/.config/rofi/run_ccs_manage.sh" >/dev/null 2>&1
+# ROFI_RETV=11 is -kb-custom-2 (Control+o, see run_claude_picker.sh): open
+# the selected row's linked PR without closing or refreshing the list.
+if [ "$ROFI_RETV" = "11" ]; then
+    [ -n "$sid" ] && [ "$sid" != "manage" ] || exit 0
+    out=$("$CCS" open-pr "$sid" 2>&1) || dunstify "ccs open-pr" "$out"
     exit 0
 fi
 
-IFS='|' read -r sid con_id <<< "$ROFI_INFO"
+if [ "$sid" = "manage" ]; then
+    setsid -f "$HOME/.config/rofi/run_ccs_manage.sh" >/dev/null 2>&1
+    exit 0
+fi
 
 if [ -n "$con_id" ] && [ "$con_id" != "-" ]; then
     i3-msg "[con_id=$con_id] focus" >/dev/null 2>&1

@@ -21,6 +21,8 @@ from i3ipc import Connection, Event
 
 STATE_DIR = Path.home() / ".claude" / "notification-state"
 LOCK_FILE = Path("/tmp/claude-notification-dismiss.lock")
+CCS = Path.home() / ".claude" / "session-manager" / ".venv" / "bin" / "ccs"
+SET_STATE = Path.home() / ".claude" / "skills" / "title" / "scripts" / "set_state.sh"
 
 
 def ensure_single_instance():
@@ -53,6 +55,24 @@ def close_notification(notification_id: int) -> None:
     subprocess.run(["dunstctl", "close", str(notification_id)], check=False)
 
 
+def mark_seen(session_key: str) -> None:
+    """Fire-and-forget seen markers for the focused session's window key."""
+    for cmd in (
+        [str(CCS), "seen", "--window", session_key],
+        [str(SET_STATE), "seen", session_key],
+    ):
+        try:
+            subprocess.Popen(
+                cmd,
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                start_new_session=True,
+            )
+        except OSError:
+            pass
+
+
 def on_window_focus(_i3, event) -> None:
     """Handle window focus event."""
     if not event.container.window:
@@ -63,6 +83,12 @@ def on_window_focus(_i3, event) -> None:
 
     if not session_key:
         return
+
+    try:
+        mark_seen(session_key)
+    except Exception:
+        # Marking seen must never take down the focus-event handler.
+        pass
 
     notification_file = STATE_DIR / f"notification_id.{session_key}"
     if notification_file.exists():

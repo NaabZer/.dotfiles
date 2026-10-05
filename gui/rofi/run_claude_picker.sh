@@ -1,5 +1,5 @@
 #!/bin/bash
-# Claude Code Picker Launcher — starts at the top row on the "all" tab;
+# Claude Code Picker Launcher — starts at the top row on the "attention" tab;
 # tiers order each tab's list, and sidebar tabs filter by tier (see below).
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PICKER_SCRIPT="$SCRIPT_DIR/claude_picker.sh"
@@ -25,10 +25,14 @@ PICKER_SCRIPT="$SCRIPT_DIR/claude_picker.sh"
 # token instead of switching tabs); the mode-switcher element itself is
 # already styled in claude_picker.rasi, so -sidebar-mode just lights it up,
 # and Ctrl+h/l plus Shift+Left/Right already switch modes via the user's
-# kb-mode-next/kb-mode-previous config.
-rofi -show all -sidebar-mode -modi \
-    "all:$PICKER_SCRIPT all,open (~o):$PICKER_SCRIPT open,review (~r):$PICKER_SCRIPT review,parked (~p):$PICKER_SCRIPT parked,snoozed (~s):$PICKER_SCRIPT snoozed" \
+# kb-mode-next/kb-mode-previous config. "attention" leads so launching the
+# picker lands on the ranked rows that need a look first.
+#
+# -kb-custom-2 is Control+o, opening the selected row's linked PR
+# (claude_picker.sh's ROFI_RETV=11 branch); rofi has no default binding here.
+rofi -show attention -sidebar-mode -modi \
+    "attention:$PICKER_SCRIPT attention,all:$PICKER_SCRIPT all,open (~o):$PICKER_SCRIPT open,review (~r):$PICKER_SCRIPT review,parked (~p):$PICKER_SCRIPT parked,snoozed (~s):$PICKER_SCRIPT snoozed" \
     -matching fuzzy -sort -sorting-method fzf \
     -selected-row 0 -dpi 82 \
-    -kb-custom-1 "Control+a" -kb-move-front "" -eh 3 \
+    -kb-custom-1 "Control+a" -kb-custom-2 "Control+o" -kb-move-front "" -eh 3 \
     -theme "$SCRIPT_DIR/claude_picker.rasi"
