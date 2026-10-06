@@ -3,8 +3,9 @@
 i3 Claude Title Color Daemon
 
 Colors the trailing status token ([running]/[permission]/[input]/[dialog]/
-[attention]/[idle]) in the i3 window title of Claude Code Alacritty terminals
-using per-window Pango title_format markup.
+[idle]) in the i3 window title of Claude Code Alacritty terminals using
+per-window Pango title_format markup. An optional trailing " #<PR number>"
+after the token is colored purple.
 
 Only manages Alacritty windows whose title contains "[CC]" (case-insensitive).
 On shutdown, resets every managed window's title_format back to plain "%title"
@@ -27,7 +28,7 @@ LOCK_FILE = Path("/tmp/claude-title-color.lock")
 GREEN = "#5dbd70"
 ORANGE = "#e09448"
 RED = "#f7768e"
-YELLOW = "#e0af68"
+PURPLE = "#bb9af7"
 
 # Keyed by the word inside the trailing "[...]" token (see
 # skills/title/scripts/set_state.sh LABEL_* constants), not the leading
@@ -38,10 +39,9 @@ STATUS_COLORS = {
     "permission": RED,
     "input": RED,
     "dialog": RED,
-    "attention": YELLOW,
 }
 
-_TRAILING_TOKEN_RE = re.compile(r"\[([^\[\]]*)\]$")
+_TRAILING_TOKEN_RE = re.compile(r"\[([^\[\]]*)\](?: (#\d+))?$")
 
 _reset_done = False
 _i3: Connection | None = None
@@ -77,16 +77,20 @@ def build_title_format(title: str) -> str:
         return "%title"
 
     inner = match.group(1)
+    suffix = match.group(2)
     word = inner.split()[-1].lower() if inner.split() else ""
     color = STATUS_COLORS.get(word)
     if color is None:
         return "%title"
 
-    token = match.group(0)
-    escaped = pango_escape(title)
-    idx = escaped.rfind(pango_escape(token))
-    span = f"<span foreground='{color}'>{pango_escape(token)}</span>"
-    return escaped[:idx] + span + escaped[idx + len(pango_escape(token)) :]
+    prefix = pango_escape(title[: match.start()])
+    token_span = f"<span foreground='{color}'>{pango_escape(f'[{inner}]')}</span>"
+    result = prefix + token_span
+
+    if suffix:
+        result += f" <span foreground='{PURPLE}'>{pango_escape(suffix)}</span>"
+
+    return result + title[len(stripped) :]
 
 
 def i3_command_quote(fmt: str) -> str:
